@@ -1,0 +1,333 @@
+@import 'variables.scss';
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    margin: 8px;
+    font-size: 16px;
+    padding: 14px 26px;
+    letter-spacing: 0.02rem;
+}
+
+a {
+    text-decoration: none;
+    color: $black-color;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.block {
+    display: block;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.transparent {
+    opacity: 0;
+}
+
+.rounded-sm {
+    border-radius: 4px;
+}
+
+.rounded {
+    border-radius: 8px;
+}
+
+.rounded-md {
+    border-radius: 12px;
+}
+
+.rounded-lg {
+    border-radius: 16px;
+}
+
+.rounded-xl {
+    border-radius: 20px;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+.hyperlink {
+    color: $primary-color-400;
+    text-decoration: underline;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(80%);
+    }
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.font-thin {
+    font-weight: 300;
+}
+
+.font-normal {
+    font-weight: normal;
+}
+
+.font-500 {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.text-xs {
+    font-size: 0.75rem; /* 12px */
+    line-height: 1rem;
+} 
+.text-sm {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem;
+} 
+.text-base {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem;
+} 
+.text-lg {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem;
+}
+.text-xl {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem;
+} 
+.text-2xl {
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem;
+} 
+.text-3xl {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem;
+} 
+.text-4xl {
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem;
+} 
+.text-5xl {
+    font-size: 3rem; /* 48px */
+    line-height: 1;
+}
+.text-6xl {
+    font-size: 3.75rem; /* 60px */
+    line-height: 1;
+}
+.text-7xl {
+    font-size: 4.5rem; /* 72px */
+    line-height: 1;
+}
+.text-8xl {
+    font-size: 6rem; /* 96px */
+    line-height: 1;
+}
+.text-9xl {
+    font-size: 8rem; /* 128px */
+    line-height: 1;
+}
+
+
+.half-width {
+    width: 50%;
+}
+
+.my-1 {
+    margin: 4px 0;
+}
+
+.my-2 {
+    margin: 8px 0;
+}
+
+.my-3 {
+    margin: 12px 0;
+}
+
+.my-4 {
+    margin: 16px 0;
+}
+
+.my-5 {
+    margin: 20px 0;
+}
+
+.my-6 {
+    margin: 24px 0;
+}
+
+.my-7 {
+    margin: 28px 0;
+}
+
+.my-8 {
+    margin: 32px 0;
+}
+
+.my-9 {
+    margin: 36px 0;
+}
+
+.my-10 {
+    margin: 40px 0;
+}
+
+.mx-1 {
+    margin: 0 4px;
+}
+
+.mx-2 {
+    margin: 0 8px;
+}
+
+.mx-3 {
+    margin: 0px 12px;
+}
+
+.mx-4 {
+    margin: 0px 16px;
+}
+
+.mx-5 {
+    margin: 0px 20px;
+}
+
+.mx-6 {
+    margin: 0px 24px;
+}
+
+.mx-7 {
+    margin: 0px 28px;
+}
+
+.mx-8 {
+    margin: 0px 32px;
+}
+
+.mx-9 {
+    margin: 0px 36px;
+}
+
+.mx-10 {
+    margin: 0px 40px;
+}
+
+.py-1 {
+    padding: 4px 0;
+}
+
+.py-2 {
+    padding: 8px 0;
+}
+
+.py-3 {
+    padding: 12px 0;
+}
+
+.py-4 {
+    padding: 16px 0;
+}
+
+.py-5 {
+    padding: 20px 0;
+}
+
+.py-6 {
+    padding: 24px 0;
+}
+
+.py-7 {
+    padding: 28px 0;
+}
+
+.py-8 {
+    padding: 32px 0;
+}
+
+.py-9 {
+    padding: 36px 0;
+}
+
+.py-10 {
+    padding: 40px 0;
+}
+
+.px-1 {
+    padding: 0 4px;
+}
+
+.px-2 {
+    padding: 0 8px;
+}
+
+.px-3 {
+    padding: 0px 12px;
+}
+
+.px-4 {
+    padding: 0px 16px;
+}
+
+.px-5 {
+    padding: 0px 20px;
+}
+
+.px-6 {
+    padding: 0px 24px;
+}
+
+.px-7 {
+    padding: 0px 28px;
+}
+
+.px-8 {
+    padding: 0px 32px;
+}
+
+.px-9 {
+    padding: 0px 36px;
+}
+
+.px-10 {
+    padding: 0px 40px;
+}
+
+
+
