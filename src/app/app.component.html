@@ -4,16 +4,18 @@
 <h4>Hello World</h4>
 <h5>Hello World</h5>
 <h6 class="mx-10">Hello World</h6>
-<p class="hyperlink text-3xl">Hello World</p>
-
+<p class="text-3xl">Hello World</p>
+<p class="hyperlink">Click me</p>
 <div class="my-3">
-    <button class="font-xl"  mat-flat-button color="primary">Click me</button>
+    <button class="font-xl"  mat-flat-button color="primary" (click)="onOpenDialog()">Click me</button>
 </div>
 
 <div class="my-3">
-    <button mat-flat-button color="accent">Click me</button>
+    <button (click)="onConfirm()" mat-flat-button color="accent">Click me</button>
 </div>
 
 <div class="my-3">
-    <button mat-flat-button color="warn">Click me</button>
+    <button mat-flat-button color="warn" (click)="onFetch()">Click me</button>
 </div>
+
+<app-spinner></app-spinner>
