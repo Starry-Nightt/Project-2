@@ -51,4 +51,15 @@ export class BaseComponent {
     const command = path instanceof Array ? path : [path];
     this.router.navigate(command, { queryParams, replaceUrl });
   }
+
+  protected resetQueryParam(queryParams: Record<string, any>) {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        ...this.queryParams,
+        ...queryParams,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
 }
