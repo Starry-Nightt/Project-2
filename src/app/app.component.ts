@@ -34,6 +34,10 @@ export class AppComponent {
     this.alertService.showMessage('Done');
   }
 
+  onWarn() {
+    this.dialogService.warning('Ban khong the');
+  }
+
   onFetch() {
     this.loaderService.showSpinner();
 

@@ -1,6 +1,7 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Injectable } from '@angular/core';
 import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
+import { WarningDialogComponent } from '@components/warning-dialog/warning-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,14 @@ export class DialogService {
       dialogRef.afterClosed().subscribe((result) => {
         return resolve(result);
       });
+    });
+  }
+
+  warning(message: string) {
+    const data = { message };
+    this.dialog.open(WarningDialogComponent, {
+      data,
+      width: '33vw',
     });
   }
 }
