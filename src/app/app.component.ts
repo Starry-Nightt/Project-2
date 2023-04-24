@@ -45,4 +45,12 @@ export class AppComponent {
       this.loaderService.hideSpinner();
     });
   }
+
+  onInputForm(value: any) {
+    console.log('Change form: ', value);
+  }
+
+  onSubmitForm(value: any) {
+    console.log('Submit form: ', value);
+  }
 }

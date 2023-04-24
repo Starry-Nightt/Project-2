@@ -17,5 +17,5 @@
 <div class="my-3">
     <button mat-flat-button color="warn" (click)="onFetch()">Click me</button>
 </div>
-
+<app-test (valueChanges)="onInputForm($event)" (formComplete)="onSubmitForm($event)"></app-test>
 <app-spinner></app-spinner>

@@ -1,4 +1,35 @@
 <p>
   {{data}}
 </p>
-<button mat-flat-button color="primary">Lo</button>
+<button mat-flat-button color="primary" (click)="onConfirmPayment()">Lo</button>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+  <h2>Sign in</h2>
+  <div class="row-control">
+    <mat-form-field appearance="outline" class="full-width form-field">
+      <mat-label>Username: </mat-label>
+      <input matInput type="text" formControlName="name" >
+      <mat-error class="error-field">
+        <app-validation-error [control]="form.controls.name"></app-validation-error>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div  class="row-control">
+    <mat-form-field appearance="outline" class="full-width form-field">
+      <mat-label>Email: </mat-label>
+      <input matInput type="email" formControlName="email">
+      <mat-error class="error-field">
+        <app-validation-error [control]="form.controls.email"></app-validation-error>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row-control">
+    <mat-checkbox>Remember me</mat-checkbox>
+  </div>
+
+  <div class="row-control row-actions text-right">
+    <button type="submit" mat-flat-button color="primary">
+      Submit
+    </button>
+  </div>
+</form>
