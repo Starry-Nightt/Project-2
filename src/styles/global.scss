@@ -59,6 +59,10 @@ a {
     opacity: 0;
 }
 
+.vh-100 {
+  height: 100vh;
+}
+
 
 .rounded-sm {
     border-radius: 4px;
@@ -89,10 +93,10 @@ a {
 }
 
 .hyperlink {
-    color: $primary-color-400;
+    color: rgb(28, 28, 255);
     font-weight: 500;
     cursor: pointer;
-    
+
     &:hover {
         text-decoration: underline;
         filter: brightness(80%);
@@ -126,15 +130,15 @@ a {
 .text-xs {
     font-size: 0.75rem; /* 12px */
     line-height: 1rem;
-} 
+}
 .text-sm {
     font-size: 0.875rem; /* 14px */
     line-height: 1.25rem;
-} 
+}
 .text-base {
     font-size: 1rem; /* 16px */
     line-height: 1.5rem;
-} 
+}
 .text-lg {
     font-size: 1.125rem; /* 18px */
     line-height: 1.75rem;
@@ -142,19 +146,19 @@ a {
 .text-xl {
     font-size: 1.25rem; /* 20px */
     line-height: 1.75rem;
-} 
+}
 .text-2xl {
     font-size: 1.5rem; /* 24px */
     line-height: 2rem;
-} 
+}
 .text-3xl {
     font-size: 1.875rem; /* 30px */
     line-height: 2.25rem;
-} 
+}
 .text-4xl {
     font-size: 2.25rem; /* 36px */
     line-height: 2.5rem;
-} 
+}
 .text-5xl {
     font-size: 3rem; /* 48px */
     line-height: 1;

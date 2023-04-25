@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { TestComponent } from '@components/test/test.component';
 import { AlertService } from '@services/alert.service';
 import { DialogService } from '@services/dialog.service';
@@ -14,10 +15,14 @@ export class AppComponent {
   constructor(
     public dialogService: DialogService,
     public alertService: AlertService,
-    public loaderService: LoaderService
+    public loaderService: LoaderService,
+    private fb: FormBuilder
   ) {}
   title = 'my-app';
-
+  form = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
+  })
   onOpenDialog() {
     this.dialogService.openDialog(TestComponent, {
       data: 'hello',

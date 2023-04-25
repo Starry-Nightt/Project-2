@@ -5,11 +5,11 @@ mat-error {
     font-weight: 500;
     letter-spacing: normal;
     color: $danger-color;
-    transform: translateX(-8px) translateY(2px);
+    transform: translateX(-12px) translateY(4px);
 }
 
 mat-form-field {
-  margin: 5px 0;
+  margin: 8px 0;
 
   mat-label {
     font-size: 14px;

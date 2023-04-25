@@ -1,0 +1,21 @@
+<form [formGroup]="form" class="form">
+  <h2>Đăng nhập</h2>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email">
+    <mat-error>
+      <app-validation-error [control]="form.controls.email"></app-validation-error>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Mật khẩu</mat-label>
+    <input matInput type="password" formControlName="password">
+    <mat-error>
+      <app-validation-error [control]="form.controls.password"></app-validation-error>
+    </mat-error>
+  </mat-form-field>
+  <div class="my-2 flex justify-end mb-5">
+    <button mat-flat-button type="submit" color="primary">Đăng nhập</button>
+  </div>
+  <a [routerLink]="'/register'" class="hyperlink">Chưa có tài khoản ? Đăng ký</a>
+</form>

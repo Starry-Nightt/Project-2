@@ -8,6 +8,7 @@ import { SharedModule } from '@shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppHttpClientService } from '@services/app-http-client.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
