@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="form">
+<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
   <h2>Đăng nhập</h2>
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Email</mat-label>

@@ -7,7 +7,7 @@ import { StorageService } from './storage.service';
   providedIn: 'root',
 })
 export class AppHttpClientService {
-  prefix: string = 'http://localhost:4000';
+  prefix: string = 'http://localhost:3000';
   constructor(private httpClient: HttpClient, public storage: StorageService) {}
 
   public get<T>(uri: string, params = {}): Observable<T> {
@@ -27,5 +27,17 @@ export class AppHttpClientService {
     return this.httpClient.delete<T>(this.prefix + uri, {
       body: params,
     });
+  }
+
+  private generateHttpHeaders() {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    if (this.storage.get('access_token')) {
+      const token = this.storage.get('access_token');
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    return headers;
   }
 }

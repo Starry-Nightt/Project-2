@@ -1,0 +1,40 @@
+<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
+  <h2>Đăng ký</h2>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+    <mat-error>
+      <app-validation-error
+        [control]="form.controls.email"
+      ></app-validation-error>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Mật khẩu</mat-label>
+    <input matInput type="password" formControlName="password" />
+    <mat-error>
+      <app-validation-error
+        [control]="form.controls.password"
+      ></app-validation-error>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Tên người dùng</mat-label>
+    <input matInput formControlName="username" />
+    <mat-error>
+      <app-validation-error
+        [control]="form.controls.username"
+      ></app-validation-error>
+    </mat-error>
+  </mat-form-field>
+  <mat-radio-group formControlName="gender">
+    <mat-label class="text-base mr-5">Giới tính</mat-label>
+    <mat-radio-button *ngFor="let item of genderRadioButtons" [value]="item.value">{{item?.viewValue}}</mat-radio-button>
+  </mat-radio-group>
+  <div class="flex justify-end mb-5">
+    <button mat-flat-button type="submit" color="primary">Đăng ký</button>
+  </div>
+  <a [routerLink]="'/login'" class="hyperlink"
+    >Đã có tài khoản ? Đăng nhập</a
+  >
+</form>
