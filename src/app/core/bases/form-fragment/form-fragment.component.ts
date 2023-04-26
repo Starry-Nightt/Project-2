@@ -35,7 +35,6 @@ export class FormFragmentComponent<T> extends BaseComponent {
 
   onSubmit() {
     if (this.form.invalid) return;
-
     this.formComplete.emit(this.form.value);
   }
 

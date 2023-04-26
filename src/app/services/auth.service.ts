@@ -1,11 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserRepository } from '@repositories/user-repository';
-import { ComponentService } from '@services/component.service';
 import { StorageService } from '@services/storage.service';
-import { catchError, of, tap } from 'rxjs';
+import { finalize, switchMap, tap } from 'rxjs';
 import { ProfileService } from './profile.service';
-import { AlertService } from '@services/alert.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +13,10 @@ export class AuthService {
   accessToken: string;
 
   constructor(
-    private alertService: AlertService,
     private profile: ProfileService,
     private storage: StorageService,
-    private userRepository: UserRepository
+    private userRepository: UserRepository,
+    private router: Router
   ) {}
 
   async login(detail: any) {
@@ -31,11 +29,8 @@ export class AuthService {
         })
       )
       .toPromise()
-      .then((res) => {
+      .then(() => {
         this.loggedIn();
-        return new Promise((resolve, reject) => {
-          resolve(res);
-        });
       });
   }
 
@@ -48,29 +43,36 @@ export class AuthService {
       .refreshToken()
       .pipe(
         tap((res) => {
-          this.setToken(res.data);
-        })
-      )
-      .toPromise();
+          this.setToken(res?.data);
+        }),
+        switchMap(res => this.userRepository.userInfo(this.accessToken))
+      ).toPromise()
   }
 
   setToken({ accessToken, refreshToken }): void {
-    if (accessToken) this.storage.set('access_token', accessToken);
+    if (accessToken) {
+      this.storage.set('access_token', accessToken);
+      this.accessToken = accessToken
+    }
+
     if (refreshToken) this.storage.set('refresh_token', refreshToken);
   }
 
   loggedIn() {
     this.isLoggedIn = true;
+    this.router.navigate(['/demo']);
   }
 
   endSession() {
     this.isLoggedIn = false;
+    this.accessToken = ''
     this.storage.remove('access_token');
     this.storage.remove('refresh_token');
     this.profile.setProfile(null);
+    this.router.navigate(['/login']);
   }
 
   logout() {
-    return this.userRepository.logout().toPromise();
+    return this.userRepository.logout().pipe(tap(() => this.endSession()))
   }
 }

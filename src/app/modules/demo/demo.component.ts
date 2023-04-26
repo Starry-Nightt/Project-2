@@ -33,10 +33,8 @@ export class DemoComponent extends BaseComponent implements OnInit {
     return null;
   }
 
-  async onLogout() {
-    await this.authService.logout();
-    this.authService.endSession();
-    this.redirect(['/login']);
+  onLogout() {
+    this.authService.logout().subscribe(() => {});
   }
 
   onVerify() {

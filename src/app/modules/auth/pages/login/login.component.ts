@@ -24,18 +24,13 @@ export class LoginComponent extends BaseComponent {
     this.verify();
   }
 
-  async login(detail: any) {
-    await this.authService.login(detail);
-    this.authService;
-    this.redirect(['/demo']);
+  login(detail: any) {
+    this.authService.login(detail);
   }
 
   async verify() {
     if (!this.storage.get('refresh_token')) return;
-    await this.authService.verifyToken();
-    const res = await this.userRepository
-      .userInfo(this.storage.get('access_token'))
-      .toPromise();
+    const res = await this.authService.verifyToken();
     if (!res?.data) return;
     const { email, password } = res.data;
     this.login({ email, password });

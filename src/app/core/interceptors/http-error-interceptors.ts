@@ -16,7 +16,7 @@ interface HttpException {
 }
 
 class UndefinedException implements HttpException {
-  code = '400';
+  code = '404';
   message = 'Undefined';
 }
 
