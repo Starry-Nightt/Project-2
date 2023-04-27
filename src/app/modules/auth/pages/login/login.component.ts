@@ -30,6 +30,9 @@ export class LoginComponent extends BaseComponent {
 
   verify() {
     if (!this.storage.get('refresh_token')) return;
-    this.authService.verifyToken().subscribe();
+    this.authService.verifyToken().subscribe((res) => {
+      const { email, password } = res.data;
+      this.login({ email, password });
+    });
   }
 }

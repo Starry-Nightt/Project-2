@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoginDetail, RegisterDetail } from '@interfaces/auth-interface';
+import { User } from '@models/user.model';
 import { AppHttpClientService } from '@services/app-http-client.service';
 import { StorageService } from '@services/storage.service';
 import { Observable } from 'rxjs';
@@ -33,7 +34,7 @@ export class UserRepository {
     return this.http.post('/auth/register', detail);
   }
 
-  getAllUser(): Observable<any> {
+  getAllUser(): Observable<User> {
     return this.http.get('/user');
   }
 

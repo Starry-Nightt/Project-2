@@ -8,4 +8,5 @@ export class User {
   gender: GENDER;
   status: STATUS;
   role: ROLE;
+  birthday: string;
 }

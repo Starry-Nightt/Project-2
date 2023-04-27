@@ -12,4 +12,5 @@ export interface RegisterDetail {
   gender: GENDER;
   status: STATUS;
   role: ROLE;
+  birthday: string;
 }

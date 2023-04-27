@@ -21,19 +21,17 @@ export class AuthService {
   ) {}
 
   login(detail: LoginDetail): Observable<any> {
-    return this.userRepository
-      .login(detail)
-      .pipe(
-        tap((res) => {
-          this.setToken(res?.data);
-          this.profile.setProfile(res?.data?.user);
-          this.loggedIn();
-        })
-      )
+    return this.userRepository.login(detail).pipe(
+      tap((res) => {
+        this.setToken(res?.data);
+        this.profile.setProfile(res?.data?.user);
+        this.loggedIn();
+      })
+    );
   }
 
   register(detail: RegisterDetail): Observable<any> {
-    return this.userRepository.register(detail)
+    return this.userRepository.register(detail);
   }
 
   verifyToken(): Observable<any> {
@@ -41,11 +39,7 @@ export class AuthService {
       tap((res) => {
         this.setToken(res?.data);
       }),
-      switchMap(() => this.userRepository.userInfo(this.accessToken)),
-      tap((res) => {
-        const { email, password } = res.data;
-        this.login({ email, password });
-      })
+      switchMap(() => this.userRepository.userInfo(this.accessToken))
     );
   }
 

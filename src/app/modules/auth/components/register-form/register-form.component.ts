@@ -4,6 +4,7 @@ import { FormFragmentComponent } from '@bases/form-fragment/form-fragment.compon
 import { ComponentService } from '@services/component.service';
 import { GENDER, ROLE, STATUS } from '@constants/enum';
 import { RegisterDetail } from '@interfaces/auth-interface';
+import { MomentToString, StringToMoment } from '@utils/convert';
 
 @Component({
   selector: 'app-register-form',
@@ -31,28 +32,29 @@ export class RegisterFormComponent
     username: ['', [Validators.required]],
     gender: [null, [Validators.required]],
     status: [STATUS.ACTIVE, [Validators.required]],
-    dateOfBirth: ['', [Validators.required]],
+    birthday: ['', [Validators.required]],
     role: [ROLE.STUDENT, [Validators.required]],
   });
 
   firstForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
-  })
+  });
 
   secondForm: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
     gender: [null, [Validators.required]],
-    dateOfBirth: ['', [Validators.required]]
-  })
+    birthday: ['', [Validators.required]],
+  });
 
   constructor(service: ComponentService, private fb: FormBuilder) {
     super(service);
   }
 
   override onSubmit(): void {
-      const formValue = {...this.firstForm.value, ...this.secondForm.value}
-      this.form.patchValue(formValue)
-      super.onSubmit();
+    const formValue = { ...this.firstForm.value, ...this.secondForm.value };
+    formValue.birthday = MomentToString(formValue.birthday);
+    this.form.patchValue(formValue);
+    super.onSubmit();
   }
 }

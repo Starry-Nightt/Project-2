@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ROLE } from '@constants/enum';
+import { User } from '@models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  current: any;
+  current: User;
 
   constructor() {}
 
@@ -21,7 +22,7 @@ export class ProfileService {
     return this.current.role === ROLE.ADMIN;
   }
 
-  setProfile(profile: any) {
+  setProfile(profile: User) {
     this.current = profile;
   }
 }
