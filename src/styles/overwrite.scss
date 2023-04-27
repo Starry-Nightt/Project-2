@@ -1,12 +1,6 @@
 @import 'variables';
 
-mat-error {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: normal;
-    color: $danger-color;
-    transform: translateX(-12px) translateY(4px);
-}
+
 
 mat-form-field {
   margin: 8px 0;
@@ -14,6 +8,19 @@ mat-form-field {
   mat-label {
     font-size: 14px;
   }
+
+  mat-hint {
+    font-size: 12px;
+    transform: translateX(-8px) translateY(4px);
+  }
+
+  mat-error {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: normal;
+    color: $danger-color;
+    transform: translateX(-12px) translateY(4px);
+}
 }
 
 

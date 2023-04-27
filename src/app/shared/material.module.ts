@@ -11,6 +11,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   exports: [
     MatButtonModule,
@@ -21,6 +26,11 @@ import { MatRadioModule } from '@angular/material/radio';
     MatInputModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatSelectModule,
+    MatIconModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     {
@@ -31,6 +41,8 @@ import { MatRadioModule } from '@angular/material/radio';
       provide: MAT_DIALOG_DATA,
       useValue: [],
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    MatDatepickerModule,
   ],
 })
 export class MaterialModule {}

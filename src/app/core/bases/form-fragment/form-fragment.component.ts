@@ -9,7 +9,7 @@ import { debounceTime, map, tap } from 'rxjs';
   templateUrl: './form-fragment.component.html',
   styleUrls: ['./form-fragment.component.css'],
 })
-export class FormFragmentComponent<T> extends BaseComponent {
+export class FormFragmentComponent<T> extends BaseComponent implements OnInit {
   form!: FormGroup;
   @Input() isEdit = false;
   @Input() set data(value: T) {
@@ -24,8 +24,12 @@ export class FormFragmentComponent<T> extends BaseComponent {
     super(componentService);
   }
 
-  detectValueChanges() {
-    this.form.valueChanges
+  ngOnInit(): void {
+      this.detectValueChanges(this.form)
+  }
+
+  detectValueChanges(form: FormGroup) {
+    form.valueChanges
       .pipe(
         debounceTime(300),
         map((res) => !!res)

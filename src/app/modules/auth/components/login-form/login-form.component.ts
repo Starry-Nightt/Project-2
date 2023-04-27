@@ -21,6 +21,4 @@ export class LoginFormComponent
   constructor(service: ComponentService, private fb: FormBuilder) {
     super(service);
   }
-
-  ngOnInit() {}
 }

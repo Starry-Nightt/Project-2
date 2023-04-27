@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserRepository } from '@repositories/user-repository';
 import { StorageService } from '@services/storage.service';
-import { finalize, switchMap, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { ProfileService } from './profile.service';
 import { Router } from '@angular/router';
 import { LoginDetail, RegisterDetail } from '@interfaces/auth-interface';
@@ -20,26 +20,23 @@ export class AuthService {
     private router: Router
   ) {}
 
-  async login(detail: LoginDetail) {
+  login(detail: LoginDetail): Observable<any> {
     return this.userRepository
       .login(detail)
       .pipe(
         tap((res) => {
           this.setToken(res?.data);
           this.profile.setProfile(res?.data?.user);
+          this.loggedIn();
         })
       )
-      .toPromise()
-      .then(() => {
-        this.loggedIn();
-      });
   }
 
-  register(detail: RegisterDetail) {
-    return this.userRepository.register(detail).toPromise();
+  register(detail: RegisterDetail): Observable<any> {
+    return this.userRepository.register(detail)
   }
 
-  verifyToken() {
+  verifyToken(): Observable<any> {
     return this.userRepository.refreshToken().pipe(
       tap((res) => {
         this.setToken(res?.data);
@@ -75,7 +72,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  logout() {
+  logout(): Observable<any> {
     return this.userRepository.logout().pipe(tap(() => this.endSession()));
   }
 }

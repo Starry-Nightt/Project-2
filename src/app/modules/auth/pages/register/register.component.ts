@@ -16,8 +16,9 @@ export class RegisterComponent extends BaseComponent {
 
   ngOnInit() {}
 
-  async register(detail: RegisterDetail) {
-    await this.authService.register(detail);
-    this.redirect(['/login']);
+  register(detail: RegisterDetail) {
+    this.authService.register(detail).subscribe(() => {
+      this.redirect(['/login']);
+    });
   }
 }

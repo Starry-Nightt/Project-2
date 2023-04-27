@@ -34,7 +34,7 @@ export class DemoComponent extends BaseComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.logout().subscribe(() => {});
+    this.authService.logout().subscribe();
   }
 
   onVerify() {

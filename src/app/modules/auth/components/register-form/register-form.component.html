@@ -1,40 +1,62 @@
-<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
-  <h2>Đăng ký</h2>
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Email</mat-label>
-    <input matInput type="email" formControlName="email" />
-    <mat-error>
-      <app-validation-error
-        [control]="form.controls.email"
-      ></app-validation-error>
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Mật khẩu</mat-label>
-    <input matInput type="password" formControlName="password" />
-    <mat-error>
-      <app-validation-error
-        [control]="form.controls.password"
-      ></app-validation-error>
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Tên người dùng</mat-label>
-    <input matInput formControlName="username" />
-    <mat-error>
-      <app-validation-error
-        [control]="form.controls.username"
-      ></app-validation-error>
-    </mat-error>
-  </mat-form-field>
-  <mat-radio-group formControlName="gender">
-    <mat-label class="text-base mr-5">Giới tính</mat-label>
-    <mat-radio-button *ngFor="let item of genderRadioButtons" [value]="item.value">{{item?.viewValue}}</mat-radio-button>
-  </mat-radio-group>
-  <div class="flex justify-end mb-5">
-    <button mat-flat-button type="submit" color="primary">Đăng ký</button>
-  </div>
-  <a [routerLink]="'/login'" class="hyperlink"
-    >Đã có tài khoản ? Đăng nhập</a
-  >
-</form>
+<h2 class="text-center">Đăng ký</h2>
+<mat-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="firstForm" label="Tạo tài khoản">
+    <form [formGroup]="firstForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error>
+          <app-validation-error
+            [control]="form.controls.email"
+          ></app-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Mật khẩu</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error>
+          <app-validation-error
+            [control]="form.controls.password"
+          ></app-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <div class="flex justify-end mb-5">
+        <button mat-flat-button matStepperNext color="primary">Tiếp tục</button>
+      </div>
+      <a [routerLink]="'/login'" class="hyperlink">Đã có tài khoản ? Đăng nhập</a>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondForm" label="Điền thông tin">
+    <form [formGroup]="secondForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tên người dùng</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error>
+          <app-validation-error
+            [control]="form.controls.username"
+          ></app-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Ngày sinh</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          <app-validation-error
+            [control]="form.controls.dateOfBirth"
+          ></app-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <div></div>
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button *ngFor="let item of genderRadioButtons" [value]="item.value">{{item?.viewValue}}</mat-radio-button>
+      </mat-radio-group>
+
+      <div class="flex space-between mt-5 mb-5">
+        <button mat-flat-button matStepperPrevious>Quay về</button>
+        <button mat-flat-button color="primary" type="button" (click)="onSubmit()">Đăng ký tài khoản</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>

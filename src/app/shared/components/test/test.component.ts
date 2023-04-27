@@ -24,9 +24,6 @@ export class TestComponent
     super(service);
   }
 
-  ngOnInit(): void {
-    this.detectValueChanges();
-  }
 
   onConfirmPayment() {
     const payment = () => {

@@ -54,7 +54,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err?.error?.message && err.status !== 401)
           this.alertService.showMessage(err?.error?.message);
-
+        else if (!err?.error?.message)
+          this.alertService.showMessage('Đã xảy ra lỗi. Xin vui lòng thử lại');
         if (err.status === 401) {
           this.authService
             .verifyToken()

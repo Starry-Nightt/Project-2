@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormFragmentComponent } from '@bases/form-fragment/form-fragment.component';
 import { ComponentService } from '@services/component.service';
 import { GENDER, ROLE, STATUS } from '@constants/enum';
@@ -31,12 +31,28 @@ export class RegisterFormComponent
     username: ['', [Validators.required]],
     gender: [null, [Validators.required]],
     status: [STATUS.ACTIVE, [Validators.required]],
-    roleId: [ROLE.STUDENT, [Validators.required]],
+    dateOfBirth: ['', [Validators.required]],
+    role: [ROLE.STUDENT, [Validators.required]],
   });
+
+  firstForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+  })
+
+  secondForm: FormGroup = this.fb.group({
+    username: ['', [Validators.required]],
+    gender: [null, [Validators.required]],
+    dateOfBirth: ['', [Validators.required]]
+  })
 
   constructor(service: ComponentService, private fb: FormBuilder) {
     super(service);
   }
 
-  ngOnInit() {}
+  override onSubmit(): void {
+      const formValue = {...this.firstForm.value, ...this.secondForm.value}
+      this.form.patchValue(formValue)
+      super.onSubmit();
+  }
 }
