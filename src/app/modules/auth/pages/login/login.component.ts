@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@bases/base/base.component';
+import { LoginDetail } from '@interfaces/auth-interface';
 import { UserRepository } from '@repositories/user-repository';
 import { ComponentService } from '@services/component.service';
 import { StorageService } from '@services/storage.service';
@@ -14,7 +15,6 @@ export class LoginComponent extends BaseComponent {
   constructor(
     service: ComponentService,
     private authService: AuthService,
-    private userRepository: UserRepository,
     private storage: StorageService
   ) {
     super(service);
@@ -24,15 +24,12 @@ export class LoginComponent extends BaseComponent {
     this.verify();
   }
 
-  login(detail: any) {
+  login(detail: LoginDetail) {
     this.authService.login(detail);
   }
 
-  async verify() {
+  verify() {
     if (!this.storage.get('refresh_token')) return;
-    const res = await this.authService.verifyToken();
-    if (!res?.data) return;
-    const { email, password } = res.data;
-    this.login({ email, password });
+    this.authService.verifyToken().subscribe(() => {});
   }
 }

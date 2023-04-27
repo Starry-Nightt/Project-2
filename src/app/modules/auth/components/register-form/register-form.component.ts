@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FormFragmentComponent } from '@bases/form-fragment/form-fragment.component';
 import { ComponentService } from '@services/component.service';
 import { GENDER, ROLE, STATUS } from '@constants/enum';
+import { RegisterDetail } from '@interfaces/auth-interface';
 
 @Component({
   selector: 'app-register-form',
@@ -10,7 +11,7 @@ import { GENDER, ROLE, STATUS } from '@constants/enum';
   styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent
-  extends FormFragmentComponent<any>
+  extends FormFragmentComponent<RegisterDetail>
   implements OnInit
 {
   genderRadioButtons = [
@@ -33,7 +34,7 @@ export class RegisterFormComponent
     roleId: [ROLE.STUDENT, [Validators.required]],
   });
 
-  constructor(private service: ComponentService, private fb: FormBuilder) {
+  constructor(service: ComponentService, private fb: FormBuilder) {
     super(service);
   }
 

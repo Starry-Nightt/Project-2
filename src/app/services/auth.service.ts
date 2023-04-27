@@ -4,6 +4,7 @@ import { StorageService } from '@services/storage.service';
 import { finalize, switchMap, tap } from 'rxjs';
 import { ProfileService } from './profile.service';
 import { Router } from '@angular/router';
+import { LoginDetail, RegisterDetail } from '@interfaces/auth-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class AuthService {
     private router: Router
   ) {}
 
-  async login(detail: any) {
+  async login(detail: LoginDetail) {
     return this.userRepository
       .login(detail)
       .pipe(
@@ -34,25 +35,27 @@ export class AuthService {
       });
   }
 
-  register(detail: any) {
+  register(detail: RegisterDetail) {
     return this.userRepository.register(detail).toPromise();
   }
 
   verifyToken() {
-    return this.userRepository
-      .refreshToken()
-      .pipe(
-        tap((res) => {
-          this.setToken(res?.data);
-        }),
-        switchMap(res => this.userRepository.userInfo(this.accessToken))
-      ).toPromise()
+    return this.userRepository.refreshToken().pipe(
+      tap((res) => {
+        this.setToken(res?.data);
+      }),
+      switchMap(() => this.userRepository.userInfo(this.accessToken)),
+      tap((res) => {
+        const { email, password } = res.data;
+        this.login({ email, password });
+      })
+    );
   }
 
   setToken({ accessToken, refreshToken }): void {
     if (accessToken) {
       this.storage.set('access_token', accessToken);
-      this.accessToken = accessToken
+      this.accessToken = accessToken;
     }
 
     if (refreshToken) this.storage.set('refresh_token', refreshToken);
@@ -65,7 +68,7 @@ export class AuthService {
 
   endSession() {
     this.isLoggedIn = false;
-    this.accessToken = ''
+    this.accessToken = '';
     this.storage.remove('access_token');
     this.storage.remove('refresh_token');
     this.profile.setProfile(null);
@@ -73,6 +76,6 @@ export class AuthService {
   }
 
   logout() {
-    return this.userRepository.logout().pipe(tap(() => this.endSession()))
+    return this.userRepository.logout().pipe(tap(() => this.endSession()));
   }
 }

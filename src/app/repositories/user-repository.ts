@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoginDetail, RegisterDetail } from '@interfaces/auth-interface';
 import { AppHttpClientService } from '@services/app-http-client.service';
 import { StorageService } from '@services/storage.service';
 import { Observable } from 'rxjs';
@@ -12,7 +13,7 @@ export class UserRepository {
     private storage: StorageService
   ) {}
 
-  login(detail: any): Observable<any> {
+  login(detail: LoginDetail): Observable<any> {
     return this.http.post('/auth/login', detail);
   }
 
@@ -28,7 +29,7 @@ export class UserRepository {
     });
   }
 
-  register(detail: any): Observable<any> {
+  register(detail: RegisterDetail): Observable<any> {
     return this.http.post('/auth/register', detail);
   }
 

@@ -10,15 +10,15 @@ export class ProfileService {
   constructor() {}
 
   get isStudent() {
-    return this.current.roleId === ROLE.STUDENT;
+    return this.current.role === ROLE.STUDENT;
   }
 
   get isTeacher() {
-    return this.current.roleId === ROLE.TEACHER;
+    return this.current.role === ROLE.TEACHER;
   }
 
   get isAdmin() {
-    return this.current.roleId === ROLE.ADMIN;
+    return this.current.role === ROLE.ADMIN;
   }
 
   setProfile(profile: any) {

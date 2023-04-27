@@ -2,24 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { FormFragmentComponent } from '@bases/form-fragment/form-fragment.component';
 import { ComponentService } from '@services/component.service';
+import { LoginDetail } from '@interfaces/auth-interface';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+  styleUrls: ['./login-form.component.css'],
 })
-export class LoginFormComponent extends FormFragmentComponent<any> implements OnInit {
-
+export class LoginFormComponent
+  extends FormFragmentComponent<LoginDetail>
+  implements OnInit
+{
   override form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]]
-  })
+    password: ['', [Validators.required]],
+  });
 
   constructor(service: ComponentService, private fb: FormBuilder) {
-    super(service)
+    super(service);
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
