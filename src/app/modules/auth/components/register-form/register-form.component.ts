@@ -15,7 +15,7 @@ export class RegisterFormComponent
   extends FormFragmentComponent<RegisterDetail>
   implements OnInit
 {
-  genderRadioButtons = [
+  genders = [
     {
       value: GENDER.MALE,
       viewValue: 'Nam',
@@ -26,19 +26,31 @@ export class RegisterFormComponent
     },
   ];
 
+  roles = [
+    {
+      value: ROLE.STUDENT,
+      viewValue: 'Học sinh',
+    },
+    {
+      value: ROLE.TEACHER,
+      viewValue: 'Giáo viên',
+    },
+  ];
+
   override form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
     username: ['', [Validators.required]],
     gender: [null, [Validators.required]],
-    status: [STATUS.ACTIVE, [Validators.required]],
+    status: [STATUS.INACTIVE, [Validators.required]],
     birthday: ['', [Validators.required]],
-    role: [ROLE.STUDENT, [Validators.required]],
+    role: [null, [Validators.required]],
   });
 
   firstForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
+    role: [null, [Validators.required]],
   });
 
   secondForm: FormGroup = this.fb.group({

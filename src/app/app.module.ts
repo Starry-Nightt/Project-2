@@ -12,6 +12,7 @@ import { AdminLayoutComponent } from '@layouts/admin-layout/admin-layout.compone
 import { StudentTeacherLayoutComponent } from '@layouts/student-teacher-layout/student-teacher-layout.component';
 import { AdminHeaderComponent } from '@layouts/admin-header/admin-header.component';
 import { StudentTeacherHeaderComponent } from '@layouts/student-teacher-header/student-teacher-header.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { StudentTeacherHeaderComponent } from '@layouts/student-teacher-header/s
     SharedModule,
     HttpClientModule,
   ],
-  providers: [AppHttpClientService, ...INTERCEPTORS],
+  providers: [AppHttpClientService, MatTableDataSource, ...INTERCEPTORS],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

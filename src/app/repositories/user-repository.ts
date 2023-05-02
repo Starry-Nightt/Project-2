@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ROLE } from '@constants/enum';
 import { LoginDetail, RegisterDetail } from '@interfaces/auth-interface';
 import { User } from '@models/user.model';
 import { AppHttpClientService } from '@services/app-http-client.service';
@@ -34,8 +35,12 @@ export class UserRepository {
     return this.http.post('/auth/register', detail);
   }
 
-  getAllUser(): Observable<User> {
+  getAllUser(): Observable<any> {
     return this.http.get('/user');
+  }
+
+  getUserByRole(role: ROLE): Observable<any> {
+    return this.http.get(`/user/role/${role}`);
   }
 
   userInfo(token: any): Observable<any> {

@@ -12,6 +12,27 @@ export class StudentTeacherHeaderComponent
   extends BaseComponent
   implements OnInit
 {
+  menu = [
+    {
+      icon: 'school',
+      path: '',
+      viewValue: 'Lớp học',
+      canDisplay: true,
+    },
+    {
+      icon: 'event_note',
+      path: '',
+      viewValue: 'Thời khóa biểu',
+      canDisplay: true,
+    },
+    {
+      icon: 'class',
+      path: '',
+      viewValue: 'Đăng ký khóa học',
+      canDisplay: this.isStudent,
+    },
+  ];
+
   constructor(service: ComponentService, public profile: ProfileService) {
     super(service);
   }

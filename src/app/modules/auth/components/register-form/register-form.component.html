@@ -20,6 +20,9 @@
           ></app-validation-error>
         </mat-error>
       </mat-form-field>
+      <mat-radio-group formControlName="role">
+        <mat-radio-button *ngFor="let item of roles" [value]="item.value">{{item?.viewValue}}</mat-radio-button>
+      </mat-radio-group>
       <div class="flex justify-end mb-5">
         <button mat-flat-button matStepperNext color="primary">Tiếp tục</button>
       </div>
@@ -50,7 +53,7 @@
       </mat-form-field>
       <div></div>
       <mat-radio-group formControlName="gender">
-        <mat-radio-button *ngFor="let item of genderRadioButtons" [value]="item.value">{{item?.viewValue}}</mat-radio-button>
+        <mat-radio-button *ngFor="let item of genders" [value]="item.value">{{item?.viewValue}}</mat-radio-button>
       </mat-radio-group>
 
       <div class="flex space-between mt-5 mb-5">

@@ -22,8 +22,15 @@ const routes: Routes = [
     path: 'manage',
     canActivate: [AdminGuard],
     component: AdminLayoutComponent,
-    loadChildren: () =>
-      import('./modules/demo/demo.module').then((m) => m.DemoModule),
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/teacher/teacher.module').then(
+            (m) => m.TeacherModule
+          ),
+      },
+    ],
   },
 ];
 

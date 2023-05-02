@@ -6,6 +6,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-layout.component.scss'],
 })
 export class AdminLayoutComponent implements OnInit {
+  menu = [
+    {
+      icon: 'event_note',
+      path: '',
+      viewValue: 'Khóa học',
+    },
+    {
+      icon: 'people',
+      path: '',
+      viewValue: 'Giáo viên',
+    },
+    {
+      icon: 'people_outline',
+      path: '',
+      viewValue: 'Học sinh',
+    },
+    {
+      icon: 'school',
+      path: '',
+      viewValue: 'Lớp học',
+    },
+    {
+      icon: 'spa',
+      path: '',
+      viewValue: 'Môn học',
+    },
+  ];
+
   constructor() {}
 
   ngOnInit() {}

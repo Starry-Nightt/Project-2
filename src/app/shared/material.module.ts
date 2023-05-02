@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { CdkTableModule } from '@angular/cdk/table';
 import {
   MAT_DATE_LOCALE,
   MAT_DATE_FORMATS,
@@ -27,6 +28,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 const DATE_FORMAT = {
   parse: {
@@ -43,6 +46,9 @@ const DATE_FORMAT = {
 @NgModule({
   exports: [
     MatButtonModule,
+    MatSortModule,
+    CdkTableModule,
+    MatTableModule,
     MatDialogModule,
     MatSnackBarModule,
     MatCardModule,
@@ -60,6 +66,7 @@ const DATE_FORMAT = {
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
+    CdkTableModule,
   ],
   providers: [
     {
