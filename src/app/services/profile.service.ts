@@ -22,6 +22,10 @@ export class ProfileService {
     return this.current.role === ROLE.ADMIN;
   }
 
+  get roleName() {
+    return this.isAdmin ? 'Admin' : this.isStudent ? 'Student' : 'Teacher';
+  }
+
   setProfile(profile: User) {
     this.current = profile;
   }

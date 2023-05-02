@@ -1,0 +1,19 @@
+@import 'variables';
+
+.sidenav {
+    min-width: 280px;
+    background-image: linear-gradient(to bottom right,$primary-color-700, $primary-color-400);
+}
+
+.text-white {
+    color: $white-color !important;
+}
+
+mat-list-item {
+    cursor: pointer !important;
+    transition: 0.3s ease;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+    }
+}

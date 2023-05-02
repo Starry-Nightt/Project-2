@@ -5,14 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '@shared/shared.module';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppHttpClientService } from '@services/app-http-client.service';
 import { INTERCEPTORS } from '@interceptors';
-import { AuthInterceptor } from '@interceptors/auth-interceptor';
-import { LoaderInterceptor } from '@interceptors/loader-interceptor';
+import { AdminLayoutComponent } from '@layouts/admin-layout/admin-layout.component';
+import { StudentTeacherLayoutComponent } from '@layouts/student-teacher-layout/student-teacher-layout.component';
+import { AdminHeaderComponent } from '@layouts/admin-header/admin-header.component';
+import { StudentTeacherHeaderComponent } from '@layouts/student-teacher-header/student-teacher-header.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    AdminLayoutComponent,
+    StudentTeacherLayoutComponent,
+    AdminHeaderComponent,
+    StudentTeacherHeaderComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

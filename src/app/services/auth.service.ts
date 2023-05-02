@@ -54,7 +54,8 @@ export class AuthService {
 
   loggedIn() {
     this.isLoggedIn = true;
-    this.router.navigate(['/demo']);
+    if (this.profile.isAdmin) this.router.navigate(['/manage']);
+    else this.router.navigate(['/use']);
   }
 
   endSession() {

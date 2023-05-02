@@ -1,0 +1,22 @@
+@import "variables";
+
+.inline-list {
+  display: flex;
+
+  mat-list-item {
+    cursor: pointer;
+    width: fit-content !important;
+    transition: 0.3s ease;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+    mat-icon {
+      margin: 0 16px !important;
+    }
+  }
+}
+
+.text-white {
+  color: $white-color !important;
+}

@@ -1,0 +1,25 @@
+<div class="flex px-4">
+  <div class="avatar clickable" [matMenuTriggerFor]="menu">
+    <img src="../../../../assets/images/avatar-admin-default.jpg" *ngIf="isAdmin">
+    <img src="../../../../assets/images/avatar-student-default.jpg" *ngIf="isStudent">
+    <img src="../../../../assets/images/avatar-teacher-default.jpg" *ngIf="isTeacher">
+  </div>
+  <div class="flex-col">
+    <span class="text-base font-500">{{username}}</span>
+    <span class="text-sm font-500 text-gray">{{role}}</span>
+  </div>
+</div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>person</mat-icon>
+    <span>Thông tin tài khoản</span>
+  </button>
+  <button mat-menu-item [disabled]="isAdmin">
+    <mat-icon> vpn_key</mat-icon>
+    <span>Đổi mật khẩu</span>
+  </button>
+  <button mat-menu-item (click)="onLogout()">
+    <mat-icon>subdirectory_arrow_right</mat-icon>
+    <span>Đăng xuất</span>
+  </button>
+</mat-menu>

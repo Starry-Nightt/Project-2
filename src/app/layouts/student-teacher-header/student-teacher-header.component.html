@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="flex space-between">
+    <ng-container>
+      <span *ngIf="isStudent">Student Browser</span>
+      <span *ngIf="isTeacher">Teacher Browser</span>
+    </ng-container>
+    <mat-list role="list" class="inline-list">
+      <mat-list-item role="listitem">
+        <mat-icon matListItemIcon class="text-white">school</mat-icon>
+        <div matListItemTitle class="text-white">Lớp học</div>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <mat-icon matListItemIcon class="text-white">event_note</mat-icon>
+        <div matListItemTitle class="text-white">Thời khóa biểu</div>
+      </mat-list-item>
+      <mat-list-item role="listitem" *ngIf="isStudent">
+        <mat-icon matListItemIcon class="text-white">class</mat-icon>
+        <div matListItemTitle class="text-white">Đăng ký khóa học</div>
+      </mat-list-item>
+    </mat-list>
+    <app-user-nav></app-user-nav>
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -21,9 +21,7 @@ export class DemoComponent extends BaseComponent implements OnInit {
     super(service);
   }
 
-  ngOnInit() {
-    console.log(StringToMoment(this.profile.current.birthday));
-  }
+  ngOnInit() {}
 
   getName() {
     return this.profile.current?.username;

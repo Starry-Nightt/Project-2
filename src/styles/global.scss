@@ -22,6 +22,10 @@ a {
     display: flex;
 }
 
+.flex-1 {
+    flex: 1;
+}
+
 .justify-center {
     justify-content: center;
 }
@@ -183,7 +187,6 @@ a {
     font-size: 8rem; /* 128px */
     line-height: 1;
 }
-
 
 .full-width {
     width: 100%;

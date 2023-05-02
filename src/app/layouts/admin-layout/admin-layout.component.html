@@ -1,0 +1,33 @@
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="side" class="sidenav flex" [opened]="true">
+    <mat-list role="list">
+      <div mat-subheader class="text-white">
+        <h2>Admin Browser</h2>
+      </div>
+      <mat-list-item role="listitem" class="mt-10">
+        <mat-icon matListItemIcon class="text-white">event_note</mat-icon>
+        <div matListItemTitle class="text-white">Khóa học</div>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <mat-icon matListItemIcon class="text-white">people</mat-icon>
+        <div matListItemTitle class="text-white">Giáo viên</div>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <mat-icon matListItemIcon class="text-white">people_outline</mat-icon>
+        <div matListItemTitle class="text-white">Học sinh</div>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <mat-icon matListItemIcon class="text-white">spa</mat-icon>
+        <div matListItemTitle class="text-white">Môn học</div>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <mat-icon matListItemIcon class="text-white">school</mat-icon>
+        <div matListItemTitle class="text-white">Lớp học</div>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <div>
+    <app-admin-header (toggleSideNav)="drawer.toggle()"></app-admin-header>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

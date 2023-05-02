@@ -22,6 +22,11 @@ import {
   DateAdapter,
 } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
 const DATE_FORMAT = {
   parse: {
@@ -40,8 +45,12 @@ const DATE_FORMAT = {
     MatButtonModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatCardModule,
+    MatToolbarModule,
     MatProgressSpinnerModule,
+    MatListModule,
     MatFormFieldModule,
+    MatMenuModule,
     MatInputModule,
     MatCheckboxModule,
     MatRadioModule,
@@ -50,6 +59,7 @@ const DATE_FORMAT = {
     MatStepperModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSidenavModule,
   ],
   providers: [
     {
