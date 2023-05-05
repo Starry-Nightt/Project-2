@@ -4,8 +4,6 @@ import { ROLE } from '@constants/enum';
 import { User } from '@models/user.model';
 import { UserRepository } from '@repositories/user-repository';
 import { ComponentService } from '@services/component.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { DataSource } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-teacher-list',
@@ -13,9 +11,8 @@ import { DataSource } from '@angular/cdk/table';
   styleUrls: ['./teacher-list.component.css'],
 })
 export class TeacherListComponent extends BaseComponent implements OnInit {
-  teachers: User[] = [];
+  dataSource: User[] = [];
   displayedColumns: string[] = [
-    'position',
     'username',
     'email',
     'gender',
@@ -23,7 +20,6 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
     'status',
     'action',
   ];
-  dataSource: any;
 
   constructor(service: ComponentService, private repository: UserRepository) {
     super(service);
@@ -35,8 +31,7 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
 
   fetchTeacher() {
     this.repository.getUserByRole(ROLE.TEACHER).subscribe((res) => {
-      this.teachers = res.data;
-      this.dataSource = new MatTableDataSource(this.teachers);
+      this.dataSource = [];
     });
   }
 }

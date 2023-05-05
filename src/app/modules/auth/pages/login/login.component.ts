@@ -25,9 +25,7 @@ export class LoginComponent extends BaseComponent {
   }
 
   login(detail: LoginDetail) {
-    this.authService.login(detail).subscribe(() => {
-      this.alert('Đăng nhập thành công');
-    });
+    this.authService.login(detail).subscribe();
   }
 
   verify() {

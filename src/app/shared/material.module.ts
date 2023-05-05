@@ -30,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatRippleModule } from '@angular/material/core';
 
 const DATE_FORMAT = {
   parse: {
@@ -67,6 +68,7 @@ const DATE_FORMAT = {
     MatNativeDateModule,
     MatSidenavModule,
     CdkTableModule,
+    MatRippleModule,
   ],
   providers: [
     {

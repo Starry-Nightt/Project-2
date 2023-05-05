@@ -1,4 +1,4 @@
-<mat-drawer-container autosize class="min-vh-100">
+<mat-drawer-container autosize>
   <mat-drawer #drawer mode="side" class="sidenav flex" [opened]="true">
     <mat-list role="list">
       <div mat-subheader class="text-white mb-10 pb-5">
@@ -10,8 +10,10 @@
       </mat-list-item>
     </mat-list>
   </mat-drawer>
-  <div>
+  <div class="flex-col min-vh-100">
     <app-admin-header (toggleSideNav)="drawer.toggle()"></app-admin-header>
-    <router-outlet></router-outlet>
+    <div class="px-5 py-5 bg-neutral flex-1">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </mat-drawer-container>
