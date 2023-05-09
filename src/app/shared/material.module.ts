@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CdkTableModule } from '@angular/cdk/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import {
   MAT_DATE_LOCALE,
   MAT_DATE_FORMATS,
@@ -69,6 +70,7 @@ const DATE_FORMAT = {
     MatSidenavModule,
     CdkTableModule,
     MatRippleModule,
+    MatPaginatorModule,
   ],
   providers: [
     {

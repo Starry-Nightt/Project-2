@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from '@bases/base/base.component';
 import { ROLE } from '@constants/enum';
 import { User } from '@models/user.model';
 import { UserRepository } from '@repositories/user-repository';
 import { ComponentService } from '@services/component.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-teacher-list',
@@ -11,7 +14,7 @@ import { ComponentService } from '@services/component.service';
   styleUrls: ['./teacher-list.component.css'],
 })
 export class TeacherListComponent extends BaseComponent implements OnInit {
-  dataSource: User[] = [];
+  dataSource: MatTableDataSource<User>;
   displayedColumns: string[] = [
     'username',
     'email',
@@ -20,6 +23,9 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
     'status',
     'action',
   ];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(service: ComponentService, private repository: UserRepository) {
     super(service);
@@ -30,8 +36,10 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
   }
 
   fetchTeacher() {
-    this.repository.getUserByRole(ROLE.TEACHER).subscribe((res) => {
-      this.dataSource = [];
+    this.repository.getUserByRole(ROLE.STUDENT).subscribe((res) => {
+      this.dataSource = new MatTableDataSource<User>(res.data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 }
