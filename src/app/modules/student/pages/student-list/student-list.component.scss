@@ -1,0 +1,9 @@
+@import 'variables';
+
+.text-active {
+    color: $success-color;
+}
+
+.text-inactive {
+    color: $danger-color;
+}

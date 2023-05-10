@@ -14,12 +14,12 @@ export class AdminLayoutComponent implements OnInit {
     },
     {
       icon: 'people',
-      path: '',
+      path: 'teacher',
       viewValue: 'Giáo viên',
     },
     {
       icon: 'people_outline',
-      path: '',
+      path: 'student',
       viewValue: 'Học sinh',
     },
     {

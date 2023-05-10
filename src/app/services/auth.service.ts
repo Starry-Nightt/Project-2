@@ -24,7 +24,7 @@ export class AuthService {
     return this.userRepository.login(detail).pipe(
       tap((res) => {
         this.setToken(res?.data);
-        this.profile.setProfile(res?.data?.user);
+        this.profile.setProfile(res?.data?.info?.User);
         this.loggedIn();
       })
     );

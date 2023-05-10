@@ -4,7 +4,7 @@
       <div mat-subheader class="text-white mb-10 pb-5">
         <h2>Admin Browser</h2>
       </div>
-      <mat-list-item role="listitem" *ngFor="let item of menu">
+      <mat-list-item role="listitem" *ngFor="let item of menu" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <mat-icon matListItemIcon class="text-white">{{item.icon}}</mat-icon>
         <div matListItemTitle class="text-white">{{item.viewValue}}</div>
       </mat-list-item>

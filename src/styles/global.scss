@@ -14,30 +14,35 @@
   border-radius: 4px;
   padding: 4px;
   outline: none;
-  border: none;
   cursor: pointer;
-  color: $white-color;
+  color: $black-color;
   margin: 4px;
+  background-color: $white-color;
+  border: 2px solid $border-color;
 
   mat-icon {
     font-size: 18px;
-    transform: translateY(3px);
+    transform: translateY(4px);
   }
   
   &.primary {
     background-color: $primary-color;
+    color: $white-color;
   }
 
   &.accent {
     background-color: $accent-color;
+    color: $white-color;
   }
 
   &.danger {
     background-color: $danger-color;
+    color: $white-color;
   }
 
   &.success {
     background-color: $success-color;
+    color: $white-color;
   }
 }
 

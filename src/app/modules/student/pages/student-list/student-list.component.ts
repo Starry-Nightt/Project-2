@@ -1,20 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BaseComponent } from '@bases/base/base.component';
-import { ROLE } from '@constants/enum';
-import { User } from '@models/user.model';
-import { UserRepository } from '@repositories/user-repository';
-import { ComponentService } from '@services/component.service';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { TeacherRepository } from '@repositories/teacher-repository';
+import { MatTableDataSource } from '@angular/material/table';
+import { BaseComponent } from '@bases/base/base.component';
+import { User } from '@models/user.model';
+import { StudentRepository } from '@repositories/student-repository';
+import { UserRepository } from '@repositories/user-repository';
+import { ComponentService } from '@services/component.service';
 
 @Component({
-  selector: 'app-teacher-list',
-  templateUrl: './teacher-list.component.html',
-  styleUrls: ['./teacher-list.component.scss'],
+  selector: 'app-student-list',
+  templateUrl: './student-list.component.html',
+  styleUrls: ['./student-list.component.scss'],
 })
-export class TeacherListComponent extends BaseComponent implements OnInit {
+export class StudentListComponent extends BaseComponent implements OnInit {
   dataSource: MatTableDataSource<User>;
   displayedColumns: string[] = [
     'username',
@@ -30,18 +29,18 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
 
   constructor(
     service: ComponentService,
-    private repository: TeacherRepository,
+    private repository: StudentRepository,
     private userRepository: UserRepository
   ) {
     super(service);
   }
 
   ngOnInit() {
-    this.getAllTeacher();
+    this.getAllStudent();
   }
 
-  getAllTeacher() {
-    this.repository.getAllTeacher().subscribe((res) => {
+  getAllStudent() {
+    this.repository.getAllStudent().subscribe((res) => {
       this.dataSource = new MatTableDataSource<User>(res.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -59,18 +58,18 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
         (title = 'Xác nhận kích hoạt tài khoản');
     this.confirm(message, title, () => {
       this.userRepository.updateUser(id, { status: !status }).subscribe(() => {
-        this.getAllTeacher();
+        this.getAllStudent();
       });
     });
   }
 
-  onDeleteTeacher(id: number) {
+  onDeleteStudent(id: number) {
     this.confirm(
-      'Bạn có chắc chắn muốn xóa giáo viên này',
+      'Bạn có chắc chắn muốn xóa học sinh này',
       'Xác nhận xóa tài khoản',
       () => {
-        this.repository.deleteTeacher(id).subscribe(() => {
-          this.getAllTeacher();
+        this.repository.deleteStudent(id).subscribe(() => {
+          this.getAllStudent();
         });
       }
     );

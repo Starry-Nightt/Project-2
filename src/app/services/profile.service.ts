@@ -23,7 +23,11 @@ export class ProfileService {
   }
 
   get roleName() {
-    return this.isAdmin ? 'Admin' : this.isStudent ? 'Student' : 'Teacher';
+    return this.isAdmin
+      ? 'Quản trị viên'
+      : this.isStudent
+      ? 'Học sinh'
+      : 'Giáo viên';
   }
 
   setProfile(profile: User) {
