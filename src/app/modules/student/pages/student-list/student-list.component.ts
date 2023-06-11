@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { BaseComponent } from '@bases/base/base.component';
 import { User } from '@models/user.model';
 import { StudentRepository } from '@repositories/student-repository';
-import { UserRepository } from '@repositories/user-repository';
 import { ComponentService } from '@services/component.service';
 
 @Component({
@@ -29,8 +28,7 @@ export class StudentListComponent extends BaseComponent implements OnInit {
 
   constructor(
     service: ComponentService,
-    private repository: StudentRepository,
-    private userRepository: UserRepository
+    private repository: StudentRepository
   ) {
     super(service);
   }
@@ -57,7 +55,7 @@ export class StudentListComponent extends BaseComponent implements OnInit {
       (message = 'Sau khi Active, tài khoản có thể đăng nhập bình thường'),
         (title = 'Xác nhận kích hoạt tài khoản');
     this.confirm(message, title, () => {
-      this.userRepository.updateUser(id, { status: !status }).subscribe(() => {
+      this.repository.updateStudent(id, { status: !status }).subscribe(() => {
         this.getAllStudent();
       });
     });

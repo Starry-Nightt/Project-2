@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@bases/base/base.component';
 import { LoginDetail } from '@interfaces/auth-interface';
-import { UserRepository } from '@repositories/user-repository';
 import { ComponentService } from '@services/component.service';
 import { StorageService } from '@services/storage.service';
 import { AuthService } from 'src/app/services/auth.service';

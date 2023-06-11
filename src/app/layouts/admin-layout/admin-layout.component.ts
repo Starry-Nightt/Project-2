@@ -9,7 +9,7 @@ export class AdminLayoutComponent implements OnInit {
   menu = [
     {
       icon: 'event_note',
-      path: '',
+      path: 'abc',
       viewValue: 'Khóa học',
     },
     {
@@ -24,12 +24,12 @@ export class AdminLayoutComponent implements OnInit {
     },
     {
       icon: 'school',
-      path: '',
+      path: 'cde',
       viewValue: 'Lớp học',
     },
     {
       icon: 'spa',
-      path: '',
+      path: 'def',
       viewValue: 'Môn học',
     },
   ];

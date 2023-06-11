@@ -35,26 +35,6 @@ export class UserRepository {
     return this.http.post('/auth/register', detail);
   }
 
-  getAllUser(): Observable<any> {
-    return this.http.get('/user');
-  }
-
-  getUserById(id: number): Observable<any> {
-    return this.http.get(`/user/${id}`);
-  }
-
-  createUser(detail: any): Observable<any> {
-    return this.http.post('/user', detail);
-  }
-
-  updateUser(id: number, detail: any): Observable<any> {
-    return this.http.put(`/user/${id}`, detail);
-  }
-
-  deleteUser(id: number): Observable<any> {
-    return this.http.delete(`/user/${id}`);
-  }
-
   userInfo(token: any): Observable<any> {
     return this.http.post('/auth/me', { token });
   }

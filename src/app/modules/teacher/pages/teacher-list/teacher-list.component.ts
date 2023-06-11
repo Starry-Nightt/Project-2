@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from '@bases/base/base.component';
-import { ROLE } from '@constants/enum';
 import { User } from '@models/user.model';
-import { UserRepository } from '@repositories/user-repository';
 import { ComponentService } from '@services/component.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -30,8 +28,7 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
 
   constructor(
     service: ComponentService,
-    private repository: TeacherRepository,
-    private userRepository: UserRepository
+    private repository: TeacherRepository
   ) {
     super(service);
   }
@@ -58,7 +55,7 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
       (message = 'Sau khi Active, tài khoản có thể đăng nhập bình thường'),
         (title = 'Xác nhận kích hoạt tài khoản');
     this.confirm(message, title, () => {
-      this.userRepository.updateUser(id, { status: !status }).subscribe(() => {
+      this.repository.updateTeacher(id, { status: !status }).subscribe(() => {
         this.getAllTeacher();
       });
     });

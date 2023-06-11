@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@bases/base/base.component';
-import { UserRepository } from '@repositories/user-repository';
 import { ComponentService } from '@services/component.service';
-import { StringToMoment } from '@utils/convert';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
@@ -15,8 +13,7 @@ export class DemoComponent extends BaseComponent implements OnInit {
   constructor(
     service: ComponentService,
     public profile: ProfileService,
-    private authService: AuthService,
-    private userRepository: UserRepository
+    private authService: AuthService
   ) {
     super(service);
   }
@@ -40,11 +37,5 @@ export class DemoComponent extends BaseComponent implements OnInit {
 
   onVerify() {
     this.authService.verifyToken();
-  }
-
-  getUserList() {
-    this.userRepository.getAllUser().subscribe((res) => {
-      console.log(res);
-    });
   }
 }

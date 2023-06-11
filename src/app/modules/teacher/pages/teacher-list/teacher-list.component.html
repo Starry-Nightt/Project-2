@@ -43,7 +43,7 @@
         <!-- <button class="action-button primary" mat-ripple>
           <mat-icon>visibility</mat-icon>
         </button> -->
-        <button class="action-button" mat-ripple [matMenuTriggerFor]="menu" [matMenuTriggerData]="{id: element?.id, status: element?.User.status, userId: element?.User.id}">
+        <button class="action-button" mat-ripple [matMenuTriggerFor]="menu" [matMenuTriggerData]="{id: element?.id, status: element?.User.status}">
           <mat-icon>more_vert</mat-icon>
         </button>
       </td>
@@ -65,8 +65,8 @@
 </section>
 
 <mat-menu #menu="matMenu">
-  <ng-template matMenuContent let-id="id" let-status="status" let-userId="userId">
-    <button mat-menu-item (click)="onToggleStatus(userId, status)">
+  <ng-template matMenuContent let-id="id" let-status="status">
+    <button mat-menu-item (click)="onToggleStatus(id, status)">
       <span>{{status ? 'In Active' : 'Active'}}</span>
     </button>
     <button mat-menu-item (click)="onDeleteTeacher(id)">
