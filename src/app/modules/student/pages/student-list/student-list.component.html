@@ -9,31 +9,31 @@
 
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên người dùng</th>
-      <td mat-cell *matCellDef="let element">{{ element?.User?.username }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.fullName}}</td>
     </ng-container>
 
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let element">{{ element?.User?.email }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.email }}</td>
     </ng-container>
 
     <ng-container matColumnDef="gender">
       <th mat-header-cell *matHeaderCellDef>Giới tính</th>
       <td mat-cell *matCellDef="let element">
-        {{ element?.User?.gender ? "Nam" : "Nữ" }}
+        {{ element?.gender ? "Nam" : "Nữ" }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="birthday">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày sinh</th>
-      <td mat-cell *matCellDef="let element">{{ element?.User?.birthday | date }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.birthday | date }}</td>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Trạng thái</th>
       <td mat-cell *matCellDef="let element">
-        <span *ngIf="element?.User?.status" class="font-500 text-active">Active</span>
-        <span *ngIf="!element?.User?.status" class="font-500 text-inactive">In active</span>
+        <span *ngIf="element?.status" class="font-500 text-active">Active</span>
+        <span *ngIf="!element?.status" class="font-500 text-inactive">In active</span>
       </td>
     </ng-container>
 
@@ -43,7 +43,7 @@
         <!-- <button class="action-button primary" mat-ripple>
           <mat-icon>visibility</mat-icon>
         </button> -->
-        <button class="action-button" mat-ripple [matMenuTriggerFor]="menu" [matMenuTriggerData]="{id: element?.id, status: element?.User.status}">
+        <button class="action-button" mat-ripple [matMenuTriggerFor]="menu" [matMenuTriggerData]="{id: element?.accountId, status: element?.status}">
           <mat-icon>more_vert</mat-icon>
         </button>
       </td>

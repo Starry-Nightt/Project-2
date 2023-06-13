@@ -5,6 +5,9 @@ import { ComponentService } from '@services/component.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+
+import { ROLE } from '@constants/enum';
+import { AccountRepository } from '@graphql/account.repository';
 import { TeacherRepository } from '@repositories/teacher-repository';
 
 @Component({
@@ -22,13 +25,15 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
     'status',
     'action',
   ];
+  teacherList: User[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     service: ComponentService,
-    private repository: TeacherRepository
+    private repository: TeacherRepository,
+    private accountRepository: AccountRepository
   ) {
     super(service);
   }
@@ -39,10 +44,26 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
 
   getAllTeacher() {
     this.repository.getAllTeacher().subscribe((res) => {
-      this.dataSource = new MatTableDataSource<User>(res.data);
+      this.teacherList = res.data.teachers.map((item) =>
+        this.convertData(item)
+      );
+      this.dataSource = new MatTableDataSource<User>(this.teacherList);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
+
+  convertData(data): User {
+    let user: User = new User();
+    user.id = data?.id;
+    user.firstName = data?.firstName;
+    user.lastName = data?.lastName;
+    user.fullName = data?.fullName;
+    user.gender = data?.gender;
+    user.email = data?.account?.email;
+    user.status = data?.account?.status;
+    user.accountId = data?.account?.id;
+    return user;
   }
 
   onToggleStatus(id: number, status: number) {
@@ -55,20 +76,17 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
       (message = 'Sau khi Active, tài khoản có thể đăng nhập bình thường'),
         (title = 'Xác nhận kích hoạt tài khoản');
     this.confirm(message, title, () => {
-      this.repository.updateTeacher(id, { status: !status }).subscribe(() => {
-        this.getAllTeacher();
-      });
+      if (status) this.accountRepository.inactive(id).subscribe();
+      else this.accountRepository.active(id).subscribe();
     });
   }
 
-  onDeleteTeacher(id: number) {
+  onDeleteStudent(id: number) {
     this.confirm(
-      'Bạn có chắc chắn muốn xóa giáo viên này',
+      'Bạn có chắc chắn muốn xóa học sinh này',
       'Xác nhận xóa tài khoản',
       () => {
-        this.repository.deleteTeacher(id).subscribe(() => {
-          this.getAllTeacher();
-        });
+        this.accountRepository.delete(id, ROLE.TEACHER).subscribe();
       }
     );
   }

@@ -18,8 +18,8 @@ export class UserNavComponent extends BaseComponent implements OnInit {
     super(service);
   }
 
-  get username() {
-    return this.profile.current.username;
+  get fullName() {
+    return this.profile.current.fullName;
   }
 
   get role() {
@@ -41,6 +41,6 @@ export class UserNavComponent extends BaseComponent implements OnInit {
   ngOnInit() {}
 
   onLogout() {
-    this.authService.logout().subscribe();
+    this.authService.logout();
   }
 }

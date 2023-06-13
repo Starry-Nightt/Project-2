@@ -17,8 +17,12 @@ export class RegisterComponent extends BaseComponent {
   ngOnInit() {}
 
   register(detail: RegisterDetail) {
-    this.authService.register(detail).subscribe(() => {
+    console.log(detail);
+    this.authService.register(detail).subscribe((res) => {
       this.redirect(['/login']);
     });
+    // this.authService.hello().subscribe((res) => {
+    //   console.log(res);
+    // });
   }
 }

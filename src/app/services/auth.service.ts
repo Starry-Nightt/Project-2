@@ -5,6 +5,8 @@ import { Observable, switchMap, tap } from 'rxjs';
 import { ProfileService } from './profile.service';
 import { Router } from '@angular/router';
 import { LoginDetail, RegisterDetail } from '@interfaces/auth-interface';
+import { AccountRepository } from '../graphql/account.repository';
+import { ROLE } from '@constants/enum';
 
 @Injectable({
   providedIn: 'root',
@@ -17,21 +19,46 @@ export class AuthService {
     private profile: ProfileService,
     private storage: StorageService,
     private userRepository: UserRepository,
-    private router: Router
+    private router: Router,
+    private accountRepository: AccountRepository
   ) {}
 
   login(detail: LoginDetail): Observable<any> {
-    return this.userRepository.login(detail).pipe(
+    return this.accountRepository.login(detail).pipe(
       tap((res) => {
-        this.setToken(res?.data);
-        this.profile.setProfile(res?.data?.info?.User);
+        console.log(res);
+        this.setToken(res?.data?.login?.token);
+        const role = res?.data?.login?.account?.role;
+        const accountId = res?.data?.login?.account?.id;
+        if (role === ROLE.ADMIN)
+          this.profile.setProfile({
+            ...res?.data?.login?.admin,
+            role,
+            accountId,
+          });
+        else if (role === ROLE.STUDENT)
+          this.profile.setProfile({
+            ...res?.data?.login?.student,
+            role,
+            accountId,
+          });
+        else if (role === ROLE.TEACHER)
+          this.profile.setProfile({
+            ...res?.data?.login?.teacher,
+            role,
+            accountId,
+          });
         this.loggedIn();
       })
     );
   }
 
   register(detail: RegisterDetail): Observable<any> {
-    return this.userRepository.register(detail);
+    return this.accountRepository.register(detail);
+  }
+
+  hello(): Observable<any> {
+    return this.accountRepository.hello();
   }
 
   verifyToken(): Observable<any> {
@@ -43,13 +70,8 @@ export class AuthService {
     );
   }
 
-  setToken({ accessToken, refreshToken }): void {
-    if (accessToken) {
-      this.storage.set('access_token', accessToken);
-      this.accessToken = accessToken;
-    }
-
-    if (refreshToken) this.storage.set('refresh_token', refreshToken);
+  setToken(token: String): void {
+    this.storage.set('token', token);
   }
 
   loggedIn() {
@@ -61,13 +83,13 @@ export class AuthService {
   endSession() {
     this.isLoggedIn = false;
     this.accessToken = '';
-    this.storage.remove('access_token');
-    this.storage.remove('refresh_token');
+    this.storage.remove('token');
     this.profile.setProfile(null);
     this.router.navigate(['/login']);
   }
 
-  logout(): Observable<any> {
-    return this.userRepository.logout().pipe(tap(() => this.endSession()));
+  logout() {
+    // return this.userRepository.logout().pipe(tap(() => this.endSession()));
+    this.endSession();
   }
 }

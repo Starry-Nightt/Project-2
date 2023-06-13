@@ -13,6 +13,7 @@ import { StudentTeacherLayoutComponent } from '@layouts/student-teacher-layout/s
 import { AdminHeaderComponent } from '@layouts/admin-header/admin-header.component';
 import { StudentTeacherHeaderComponent } from '@layouts/student-teacher-header/student-teacher-header.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MatTableDataSource } from '@angular/material/table';
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
+    GraphQLModule,
   ],
   providers: [AppHttpClientService, MatTableDataSource, ...INTERCEPTORS],
   bootstrap: [AppComponent],

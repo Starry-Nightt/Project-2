@@ -32,15 +32,24 @@
   <mat-step [stepControl]="secondForm" label="Điền thông tin">
     <form [formGroup]="secondForm">
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Tên người dùng</mat-label>
-        <input matInput formControlName="username" />
+        <mat-label>Họ </mat-label>
+        <input matInput formControlName="lastName" />
         <mat-error>
           <app-validation-error
-            [control]="form.controls.username"
+            [control]="form.controls.lastName"
           ></app-validation-error>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tên </mat-label>
+        <input matInput formControlName="firstName" />
+        <mat-error>
+          <app-validation-error
+            [control]="form.controls.firstName"
+          ></app-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <!-- <mat-form-field appearance="outline" class="full-width">
         <mat-label>Ngày sinh</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="birthday">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -50,7 +59,7 @@
             [control]="form.controls.birthday"
           ></app-validation-error>
         </mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
       <div></div>
       <mat-radio-group formControlName="gender">
         <mat-radio-button *ngFor="let item of genders" [value]="item.value">{{item?.viewValue}}</mat-radio-button>

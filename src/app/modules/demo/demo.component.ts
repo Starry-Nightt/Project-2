@@ -21,7 +21,7 @@ export class DemoComponent extends BaseComponent implements OnInit {
   ngOnInit() {}
 
   getName() {
-    return this.profile.current?.username;
+    return this.profile.current?.fullName;
   }
 
   getRoleName() {
@@ -32,7 +32,7 @@ export class DemoComponent extends BaseComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.logout().subscribe();
+    this.authService.logout();
   }
 
   onVerify() {

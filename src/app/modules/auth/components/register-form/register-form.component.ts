@@ -40,10 +40,11 @@ export class RegisterFormComponent
   override form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
-    username: ['', [Validators.required]],
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
     gender: [null, [Validators.required]],
-    status: [STATUS.INACTIVE, [Validators.required]],
-    birthday: ['', [Validators.required]],
+    // status: [STATUS.INACTIVE, [Validators.required]],
+    // birthday: ['', [Validators.required]],
     role: [null, [Validators.required]],
   });
 
@@ -54,9 +55,10 @@ export class RegisterFormComponent
   });
 
   secondForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required]],
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
     gender: [null, [Validators.required]],
-    birthday: ['', [Validators.required]],
+    // birthday: ['', [Validators.required]],
   });
 
   constructor(service: ComponentService, private fb: FormBuilder) {
@@ -65,7 +67,7 @@ export class RegisterFormComponent
 
   override onSubmit(): void {
     const formValue = { ...this.firstForm.value, ...this.secondForm.value };
-    formValue.birthday = MomentToString(formValue.birthday);
+    // formValue.birthday = MomentToString(formValue.birthday);
     this.form.patchValue(formValue);
     super.onSubmit();
   }

@@ -20,7 +20,7 @@ export class LoginComponent extends BaseComponent {
   }
 
   ngOnInit() {
-    this.verify();
+    // this.verify();
   }
 
   login(detail: LoginDetail) {

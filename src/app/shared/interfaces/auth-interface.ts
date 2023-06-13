@@ -8,9 +8,9 @@ export interface LoginDetail {
 export interface RegisterDetail {
   email: string;
   password: string;
-  username: string;
+  firstName: string;
+  lastName: string;
   gender: GENDER;
-  status: STATUS;
   role: ROLE;
-  birthday: string;
+  birthday?: string;
 }
