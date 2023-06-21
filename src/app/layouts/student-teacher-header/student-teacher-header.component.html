@@ -1,14 +1,16 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="flex space-between">
-    <ng-container>
-      <span *ngIf="isStudent">Student Browser</span>
-      <span *ngIf="isTeacher">Teacher Browser</span>
-    </ng-container>
+    <div (click)="onNavigateHome()">
+      <span *ngIf="isStudent" class="clickable">Student Browser</span>
+      <span *ngIf="isTeacher" class="clickable">Teacher Browser</span>
+    </div>
     <mat-list role="list" class="inline-list">
-      <ng-container  *ngFor="let item of menu">
+      <ng-container *ngFor="let item of menu">
         <mat-list-item role="listitem" *ngIf="item.canDisplay">
-          <mat-icon matListItemIcon class="text-white">{{item.icon}}</mat-icon>
-          <div matListItemTitle class="text-white">{{item.viewValue}}</div>
+          <mat-icon matListItemIcon class="text-white">{{
+            item.icon
+          }}</mat-icon>
+          <div matListItemTitle class="text-white">{{ item.viewValue }}</div>
         </mat-list-item>
       </ng-container>
     </mat-list>

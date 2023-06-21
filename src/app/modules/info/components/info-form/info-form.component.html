@@ -1,0 +1,64 @@
+<div class="flex justify-center">
+  <form [formGroup]="form" class="form vh-80">
+    <div >
+      <div class="flex row space-between" *ngIf="!isEditLastName">
+        <div>
+          <span>Họ: </span>
+          <span class="font-semibold">{{userProfile.lastName}}</span>
+        </div>
+        <button mat-flat-button color="primary" class="btn full-height" (click)="toggleLastName()">Sửa</button>
+      </div>
+      <div class="flex space-between align-center" *ngIf="isEditLastName">
+        <mat-form-field appearance="outline">
+          <mat-label>Họ </mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-error>
+            <app-validation-error
+              [control]="form.controls.lastName"
+            ></app-validation-error>
+          </mat-error>
+        </mat-form-field>
+        <button mat-flat-button color="primary" class="btn full-height" (click)="onSaveLastName()">Lưu</button>
+      </div>
+
+    </div>
+    <div>
+      <div class="flex row space-between" *ngIf="!isEditFirstName">
+        <div>
+          <span>Tên: </span>
+          <span class="font-semibold">{{userProfile.firstName}}</span>
+        </div>
+        <button mat-flat-button color="primary" class="btn full-height" (click)="toggleFirstName()">Sửa</button>
+      </div>
+      <div class="flex space-between align-center" *ngIf="isEditFirstName">
+        <mat-form-field appearance="outline">
+          <mat-label>Tên </mat-label>
+          <input matInput formControlName="firstName" />
+          <mat-error>
+            <app-validation-error
+              [control]="form.controls.firstName"
+            ></app-validation-error>
+          </mat-error>
+        </mat-form-field>
+        <button mat-flat-button color="primary" class="btn full-height" (click)="onSaveFirstName()">Lưu</button>
+      </div>
+    </div>
+    <div>
+      <div class="flex row space-between" *ngIf="!isEditGender">
+        <div>
+          <span>Giới tính: </span>
+          <span class="font-semibold">{{gender}}</span>
+        </div>
+        <button mat-flat-button color="primary" class="btn full-height" (click)="toggleGender()">Sửa</button>
+      </div>
+      <div class="flex space-between align-center" *ngIf="isEditGender">
+        <mat-radio-group formControlName="gender">
+          <mat-radio-button *ngFor="let item of genders" [value]="item.value">{{
+            item?.viewValue
+          }}</mat-radio-button>
+        </mat-radio-group>
+        <button mat-flat-button color="primary" class="btn full-height" (click)="onSaveGender()">Lưu</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -2,7 +2,7 @@
   <mat-drawer #drawer mode="side" class="sidenav flex" [opened]="true">
     <mat-list role="list">
       <div mat-subheader class="text-white mb-10 pb-5">
-        <h2>Admin Browser</h2>
+        <h2 (click)="onNavigateHome()" class="clickable">Admin Browser</h2>
       </div>
       <mat-list-item role="listitem" *ngFor="let item of menu" [routerLink]="item.path" routerLinkActive="active" >
         <mat-icon matListItemIcon class="text-white">{{item.icon}}</mat-icon>

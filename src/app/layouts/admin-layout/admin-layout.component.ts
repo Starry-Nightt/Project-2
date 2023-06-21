@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { BaseComponent } from '@bases/base/base.component';
+import { ComponentService } from '@services/component.service';
 
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss'],
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent extends BaseComponent implements OnInit {
   menu = [
     {
       icon: 'event_note',
@@ -34,7 +36,13 @@ export class AdminLayoutComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(service: ComponentService) {
+    super(service);
+  }
 
   ngOnInit() {}
+
+  onNavigateHome() {
+    this.redirect('/manage');
+  }
 }

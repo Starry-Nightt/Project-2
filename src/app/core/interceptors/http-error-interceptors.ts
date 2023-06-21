@@ -1,4 +1,4 @@
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import {
   HttpErrorResponse,
   HttpEvent,
@@ -46,36 +46,14 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       tap((res: HttpResponse<any>) => {
-        if (res instanceof HttpErrorResponse) return;
-        if (res?.body?.message) {
-          this.alertService.showMessage(res?.body.message);
+        if (res?.body?.errors) {
+          this.alertService.showMessage(
+            res?.body?.errors[0]?.extensions?.exception?.message
+          );
         }
       }),
       catchError((err: HttpErrorResponse) => {
-        if (err?.error?.message && err.status !== 401)
-          this.alertService.showMessage(err?.error?.message);
-        else if (!err?.error?.message)
-          this.alertService.showMessage('Đã xảy ra lỗi. Xin vui lòng thử lại');
-        if (err.status === 401) {
-          this.authService
-            .verifyToken()
-            .pipe(
-              catchError(() => {
-                this.route.navigate(['login']);
-                return throwError(() => new UnauthenticatedException());
-              })
-            )
-            .subscribe(() => {
-              this.alertService.showMessage(
-                'Đã xảy ra lỗi. Xin vui lòng thử lại'
-              );
-              return throwError(() => new UnauthenticatedException());
-            });
-        }
-        if (err.status === 403) {
-          return throwError(() => new UnauthorizedException());
-        }
-        return throwError(() => new UndefinedException());
+        return of(null);
       })
     );
   }

@@ -118,3 +118,55 @@ export const GET_ALL_TEACHER = gql`
     }
   }
 `;
+
+export const GET_ALL_ACCOUNT = gql`
+  {
+    accounts {
+      id
+      email
+      status
+      student {
+        fullName
+        id
+      }
+      teacher {
+        fullName
+        id
+      }
+      admin {
+        fullName
+        id
+      }
+    }
+  }
+`;
+
+export const UPDATE_STUDENT = gql`
+  mutation ($info: Info!) {
+    updateStudent(info: $info) {
+      firstName
+      lastName
+      gender
+    }
+  }
+`;
+
+export const UPDATE_TEACHER = gql`
+  mutation ($info: Info!) {
+    updateTeacher(info: $info) {
+      firstName
+      lastName
+      gender
+    }
+  }
+`;
+
+export const UPDATE_ADMIN = gql`
+  mutation ($info: Info!) {
+    updateAdmin(info: $info) {
+      firstName
+      lastName
+      gender
+    }
+  }
+`;

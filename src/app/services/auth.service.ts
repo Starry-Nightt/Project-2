@@ -26,8 +26,9 @@ export class AuthService {
   login(detail: LoginDetail): Observable<any> {
     return this.accountRepository.login(detail).pipe(
       tap((res) => {
-        console.log(res);
         this.setToken(res?.data?.login?.token);
+        this.storage.set('email', JSON.stringify(detail.email));
+        this.storage.set('password', JSON.stringify(detail.password));
         const role = res?.data?.login?.account?.role;
         const accountId = res?.data?.login?.account?.id;
         if (role === ROLE.ADMIN)

@@ -23,7 +23,7 @@ export class StorageService {
   prefix: string = 'app';
   storage: any = null;
   constructor() {
-    this.storage = window.localStorage || new InmemoryStorage();
+    this.storage = window.sessionStorage || new InmemoryStorage();
   }
 
   private generateKey(key: string) {

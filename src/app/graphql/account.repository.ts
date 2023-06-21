@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import {
   ACTIVE,
   DELETE_ACCOUNT,
+  GET_ALL_ACCOUNT,
   GET_ALL_STUDENT,
   GET_ALL_TEACHER,
   HELLO,
@@ -28,11 +29,18 @@ export class AccountRepository {
   }
 
   register(detail: RegisterDetail): Observable<any> {
-    return this.apollo.mutate({ mutation: REGISTER, variables: detail });
+    return this.apollo.mutate({
+      mutation: REGISTER,
+      variables: detail,
+    });
   }
 
   hello(): Observable<any> {
     return this.apollo.watchQuery({ query: HELLO }).valueChanges;
+  }
+
+  getAllAccount(): Observable<any> {
+    return this.apollo.watchQuery({ query: GET_ALL_ACCOUNT }).valueChanges;
   }
 
   active(id: Number): Observable<any> {

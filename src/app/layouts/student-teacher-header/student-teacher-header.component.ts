@@ -46,4 +46,8 @@ export class StudentTeacherHeaderComponent
   }
 
   ngOnInit() {}
+
+  onNavigateHome() {
+    this.redirect('/use');
+  }
 }

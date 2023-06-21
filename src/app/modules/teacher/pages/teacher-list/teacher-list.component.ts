@@ -8,7 +8,7 @@ import { MatSort } from '@angular/material/sort';
 
 import { ROLE } from '@constants/enum';
 import { AccountRepository } from '@graphql/account.repository';
-import { TeacherRepository } from '@repositories/teacher-repository';
+import { TeacherRepository } from '@graphql/teacher.repository';
 
 @Component({
   selector: 'app-teacher-list',

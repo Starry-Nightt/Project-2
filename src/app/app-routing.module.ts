@@ -15,8 +15,18 @@ const routes: Routes = [
     path: 'use',
     canActivate: [AuthGuard],
     component: StudentTeacherLayoutComponent,
-    loadChildren: () =>
-      import('./modules/demo/demo.module').then((m) => m.DemoModule),
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/demo/demo.module').then((m) => m.DemoModule),
+      },
+      {
+        path: 'info',
+        loadChildren: () =>
+          import('./modules/info/info.module').then((m) => m.InfoModule),
+      },
+    ],
   },
   {
     path: 'manage',
@@ -36,6 +46,11 @@ const routes: Routes = [
           import('./modules/student/student.module').then(
             (m) => m.StudentModule
           ),
+      },
+      {
+        path: 'info',
+        loadChildren: () =>
+          import('./modules/info/info.module').then((m) => m.InfoModule),
       },
       {
         path: '',

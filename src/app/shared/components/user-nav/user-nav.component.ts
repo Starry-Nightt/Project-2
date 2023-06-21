@@ -19,7 +19,7 @@ export class UserNavComponent extends BaseComponent implements OnInit {
   }
 
   get fullName() {
-    return this.profile.current.fullName;
+    return this.profile.current.firstName + this.profile.current.lastName;
   }
 
   get role() {
@@ -42,5 +42,10 @@ export class UserNavComponent extends BaseComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  onUpdateInfo() {
+    const path = this.isAdmin ? '/manage/info' : '/use/info';
+    this.redirect(path);
   }
 }

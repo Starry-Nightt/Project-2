@@ -3,6 +3,7 @@ import { BaseComponent } from '@bases/base/base.component';
 import { LoginDetail } from '@interfaces/auth-interface';
 import { ComponentService } from '@services/component.service';
 import { StorageService } from '@services/storage.service';
+import { catchError, of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -20,7 +21,12 @@ export class LoginComponent extends BaseComponent {
   }
 
   ngOnInit() {
-    // this.verify();
+    if (!this.storage.get('email') || !this.storage.get('password')) return;
+    const detail = {
+      email: JSON.parse(this.storage.get('email')),
+      password: JSON.parse(this.storage.get('password')),
+    };
+    this.login(detail);
   }
 
   login(detail: LoginDetail) {
