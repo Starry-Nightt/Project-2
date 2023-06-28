@@ -1,0 +1,49 @@
+@import 'variables';
+
+.avatar {
+    width: 20%;
+    overflow: hidden;
+    border-radius: 100%;
+    padding: 20px;
+}
+
+.avatar img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.info {
+    padding: 30px 60px;
+    flex: 1;
+    border: 2px solid $border-color;
+    border-radius: 8px;
+    background-color: $white-color;
+    position: relative;
+
+    .btn-group {
+        position: absolute;
+        right: 50px;
+        top: 30px;
+        display: flex;
+        flex-direction: column;
+
+        .btn {
+            margin: 8px;
+        }
+    }
+}
+
+.row {
+    margin: 12px 0;
+    h4 {
+        font-size: 20px;
+        color: $primary-color-900;
+        font-weight: 500;
+    }
+
+    p {
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: 0.05rem;
+    }
+}

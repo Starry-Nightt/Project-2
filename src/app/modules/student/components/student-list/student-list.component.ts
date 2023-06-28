@@ -5,9 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { BaseComponent } from '@bases/base/base.component';
 import { User } from '@models/user.model';
 import { ComponentService } from '@services/component.service';
-import { ROLE } from '@constants/enum';
-import { AccountRepository } from '@graphql/account.repository';
-import { StudentRepository } from '@graphql/student.repository';
+import { ROLE, STATUS } from '@constants/enum';
+import { UserRepository } from '@graphql/user.repository';
 
 @Component({
   selector: 'app-student-list',
@@ -29,11 +28,7 @@ export class StudentListComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-    service: ComponentService,
-    private repository: StudentRepository,
-    private accountRepository: AccountRepository
-  ) {
+  constructor(service: ComponentService, private repository: UserRepository) {
     super(service);
   }
 
@@ -43,26 +38,11 @@ export class StudentListComponent extends BaseComponent implements OnInit {
 
   getAllStudent() {
     this.repository.getAllStudent().subscribe((res) => {
-      this.studentList = res.data.students.map((item) =>
-        this.convertData(item)
-      );
+      this.studentList = res.data.students;
       this.dataSource = new MatTableDataSource<User>(this.studentList);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
-  }
-
-  convertData(data): User {
-    let user: User = new User();
-    user.id = data?.id;
-    user.firstName = data?.firstName;
-    user.lastName = data?.lastName;
-    user.fullName = data?.fullName;
-    user.gender = data?.gender;
-    user.email = data?.account?.email;
-    user.status = data?.account?.status;
-    user.accountId = data?.account?.id;
-    return user;
   }
 
   onToggleStatus(id: number, status: number) {
@@ -75,8 +55,10 @@ export class StudentListComponent extends BaseComponent implements OnInit {
       (message = 'Sau khi Active, tài khoản có thể đăng nhập bình thường'),
         (title = 'Xác nhận kích hoạt tài khoản');
     this.confirm(message, title, () => {
-      if (status) this.accountRepository.inactive(id).subscribe();
-      else this.accountRepository.active(id).subscribe();
+      if (status)
+        this.repository.updateUser(id, { status: STATUS.INACTIVE }).subscribe();
+      else
+        this.repository.updateUser(id, { status: STATUS.ACTIVE }).subscribe();
     });
   }
 
@@ -85,8 +67,12 @@ export class StudentListComponent extends BaseComponent implements OnInit {
       'Bạn có chắc chắn muốn xóa học sinh này',
       'Xác nhận xóa tài khoản',
       () => {
-        this.accountRepository.delete(id, ROLE.STUDENT).subscribe();
+        this.repository.deleteUser(id).subscribe();
       }
     );
+  }
+
+  onViewDetail(id: number) {
+    this.redirect(['/manage/profile'], { id });
   }
 }

@@ -49,7 +49,7 @@
           ></app-validation-error>
         </mat-error>
       </mat-form-field>
-      <!-- <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Ngày sinh</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="birthday">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -59,7 +59,7 @@
             [control]="form.controls.birthday"
           ></app-validation-error>
         </mat-error>
-      </mat-form-field> -->
+      </mat-form-field>
       <div></div>
       <mat-radio-group formControlName="gender">
         <mat-radio-button *ngFor="let item of genders" [value]="item.value">{{item?.viewValue}}</mat-radio-button>

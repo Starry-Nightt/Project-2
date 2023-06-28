@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from '@components/not-found/not-found.component';
 import { AdminGuard } from '@guards/admin-guard';
 import { AuthGuard } from '@guards/auth-guard';
 import { AdminLayoutComponent } from '@layouts/admin-layout/admin-layout.component';
@@ -22,9 +23,16 @@ const routes: Routes = [
           import('./modules/demo/demo.module').then((m) => m.DemoModule),
       },
       {
-        path: 'info',
+        path: 'profile',
         loadChildren: () =>
-          import('./modules/info/info.module').then((m) => m.InfoModule),
+          import('./modules/profile/profile.module').then(
+            (m) => m.ProfileModule
+          ),
+      },
+      {
+        path: '**',
+        component: NotFoundComponent,
+        pathMatch: 'full',
       },
     ],
   },
@@ -48,13 +56,20 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'info',
+        path: 'profile',
         loadChildren: () =>
-          import('./modules/info/info.module').then((m) => m.InfoModule),
+          import('./modules/profile/profile.module').then(
+            (m) => m.ProfileModule
+          ),
       },
       {
         path: '',
         redirectTo: 'teacher',
+        pathMatch: 'full',
+      },
+      {
+        path: '**',
+        component: NotFoundComponent,
         pathMatch: 'full',
       },
     ],

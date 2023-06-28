@@ -6,9 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import { ROLE } from '@constants/enum';
-import { AccountRepository } from '@graphql/account.repository';
-import { TeacherRepository } from '@graphql/teacher.repository';
+import { ROLE, STATUS } from '@constants/enum';
+import { UserRepository } from '@graphql/user.repository';
+// import { AccountRepository } from '@graphql/account.repository';
+// import { TeacherRepository } from '@graphql/teacher.repository';
 
 @Component({
   selector: 'app-teacher-list',
@@ -30,11 +31,7 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-    service: ComponentService,
-    private repository: TeacherRepository,
-    private accountRepository: AccountRepository
-  ) {
+  constructor(service: ComponentService, private repository: UserRepository) {
     super(service);
   }
 
@@ -44,26 +41,11 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
 
   getAllTeacher() {
     this.repository.getAllTeacher().subscribe((res) => {
-      this.teacherList = res.data.teachers.map((item) =>
-        this.convertData(item)
-      );
+      this.teacherList = res.data.teachers;
       this.dataSource = new MatTableDataSource<User>(this.teacherList);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
-  }
-
-  convertData(data): User {
-    let user: User = new User();
-    user.id = data?.id;
-    user.firstName = data?.firstName;
-    user.lastName = data?.lastName;
-    user.fullName = data?.fullName;
-    user.gender = data?.gender;
-    user.email = data?.account?.email;
-    user.status = data?.account?.status;
-    user.accountId = data?.account?.id;
-    return user;
   }
 
   onToggleStatus(id: number, status: number) {
@@ -76,18 +58,24 @@ export class TeacherListComponent extends BaseComponent implements OnInit {
       (message = 'Sau khi Active, tài khoản có thể đăng nhập bình thường'),
         (title = 'Xác nhận kích hoạt tài khoản');
     this.confirm(message, title, () => {
-      if (status) this.accountRepository.inactive(id).subscribe();
-      else this.accountRepository.active(id).subscribe();
+      if (status)
+        this.repository.updateUser(id, { status: STATUS.INACTIVE }).subscribe();
+      else
+        this.repository.updateUser(id, { status: STATUS.ACTIVE }).subscribe();
     });
   }
 
   onDeleteStudent(id: number) {
     this.confirm(
-      'Bạn có chắc chắn muốn xóa học sinh này',
+      'Bạn có chắc chắn muốn xóa giáo viên này',
       'Xác nhận xóa tài khoản',
       () => {
-        this.accountRepository.delete(id, ROLE.TEACHER).subscribe();
+        this.repository.deleteUser(id).subscribe();
       }
     );
+  }
+
+  onViewDetail(id: number) {
+    this.redirect(['/manage/profile'], { id });
   }
 }

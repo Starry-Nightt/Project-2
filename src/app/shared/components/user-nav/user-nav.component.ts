@@ -45,7 +45,7 @@ export class UserNavComponent extends BaseComponent implements OnInit {
   }
 
   onUpdateInfo() {
-    const path = this.isAdmin ? '/manage/info' : '/use/info';
+    const path = this.isAdmin ? '/manage/profile' : '/use/profile';
     this.redirect(path);
   }
 }

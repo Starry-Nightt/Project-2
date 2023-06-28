@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@bases/base/base.component';
-import { RegisterDetail } from '@interfaces/auth-interface';
+import { RegisterPayload } from '@interfaces/auth-interface';
 import { ComponentService } from '@services/component.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -16,13 +16,9 @@ export class RegisterComponent extends BaseComponent {
 
   ngOnInit() {}
 
-  register(detail: RegisterDetail) {
-    console.log(detail);
-    this.authService.register(detail).subscribe((res) => {
+  register(detail: RegisterPayload) {
+    this.authService.register(detail).subscribe(() => {
       this.redirect(['/login']);
     });
-    // this.authService.hello().subscribe((res) => {
-    //   console.log(res);
-    // });
   }
 }

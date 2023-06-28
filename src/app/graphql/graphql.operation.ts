@@ -1,103 +1,71 @@
 import { gql } from 'apollo-angular';
 
-export const LOGIN = gql`
-  mutation ($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      account {
-        role
-      }
-      student {
-        id
-        firstName
-        lastName
-        gender
-        fullName
-      }
-      admin {
-        id
-        firstName
-        lastName
-        gender
-        fullName
-      }
-      teacher {
-        id
-        firstName
-        lastName
-        gender
-        fullName
-      }
-    }
-  }
-`;
-
-export const REGISTER = gql`
+export const CREATE_USER = gql`
   mutation (
     $email: String!
     $password: String!
     $role: Int!
     $firstName: String!
     $lastName: String!
-    $gender: Int!
+    $gender: Int
+    $birthday: String
   ) {
-    registerAccount(
+    createUser(
       email: $email
       password: $password
       role: $role
       firstName: $firstName
       lastName: $lastName
       gender: $gender
+      birthday: $birthday
     ) {
-      email
-      password
-    }
-  }
-`;
-
-export const HELLO = gql`
-  query {
-    info
-  }
-`;
-
-export const ACTIVE = gql`
-  mutation ($id: ID!) {
-    activeAccount(id: $id) {
-      status
-    }
-  }
-`;
-
-export const INACTIVE = gql`
-  mutation ($id: ID!) {
-    inactiveAccount(id: $id) {
-      status
-    }
-  }
-`;
-
-export const DELETE_ACCOUNT = gql`
-  mutation ($id: ID!, $role: Int!) {
-    deleteAccount(id: $id, role: $role) {
-      email
-    }
-  }
-`;
-
-export const GET_ALL_STUDENT = gql`
-  {
-    students {
       id
       firstName
       lastName
+      role
+      email
+      password
       gender
-      fullName
-      account {
-        status
-        email
-        id
-      }
+      birthday
+    }
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation ($id: Int!, $detail: Info!) {
+    updateUser(id: $id, detail: $detail) {
+      message
+      status
+    }
+  }
+`;
+
+export const GET_ALL_USER = gql`
+  {
+    users {
+      id
+      email
+      status
+      role
+      firstName
+      lastName
+      gender
+      birthday
+    }
+  }
+`;
+
+export const GET_USER = gql`
+  query ($id: Int!) {
+    user(id: $id) {
+      id
+      email
+      status
+      role
+      firstName
+      lastName
+      gender
+      birthday
     }
   }
 `;
@@ -106,67 +74,54 @@ export const GET_ALL_TEACHER = gql`
   {
     teachers {
       id
+      email
+      status
+      role
       firstName
       lastName
       gender
-      fullName
-      account {
-        status
-        email
-        id
-      }
+      birthday
     }
   }
 `;
-
-export const GET_ALL_ACCOUNT = gql`
+export const GET_ALL_STUDENT = gql`
   {
-    accounts {
+    students {
       id
       email
       status
-      student {
-        fullName
-        id
-      }
-      teacher {
-        fullName
-        id
-      }
-      admin {
-        fullName
-        id
-      }
+      role
+      firstName
+      lastName
+      gender
+      birthday
     }
   }
 `;
 
-export const UPDATE_STUDENT = gql`
-  mutation ($info: Info!) {
-    updateStudent(info: $info) {
-      firstName
-      lastName
-      gender
+export const DELETE_USER = gql`
+  mutation ($id: Int!) {
+    deleteUser(id: $id) {
+      message
+      status
     }
   }
 `;
 
-export const UPDATE_TEACHER = gql`
-  mutation ($info: Info!) {
-    updateTeacher(info: $info) {
-      firstName
-      lastName
-      gender
-    }
-  }
-`;
-
-export const UPDATE_ADMIN = gql`
-  mutation ($info: Info!) {
-    updateAdmin(info: $info) {
-      firstName
-      lastName
-      gender
+export const LOGIN = gql`
+  mutation ($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      me {
+        id
+        firstName
+        lastName
+        role
+        email
+        password
+        gender
+        birthday
+      }
     }
   }
 `;

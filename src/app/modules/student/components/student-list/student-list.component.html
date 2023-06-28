@@ -9,7 +9,7 @@
 
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên người dùng</th>
-      <td mat-cell *matCellDef="let element">{{ element?.fullName}}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.lastName + ' ' + element?.firstName}}</td>
     </ng-container>
 
     <ng-container matColumnDef="email">
@@ -40,10 +40,10 @@
     <ng-container matColumnDef="action" class="text-center">
       <th mat-header-cell *matHeaderCellDef>Tác vụ</th>
       <td mat-cell *matCellDef="let element">
-        <!-- <button class="action-button primary" mat-ripple>
+        <button class="action-button primary" mat-ripple (click)="onViewDetail(element?.id)">
           <mat-icon>visibility</mat-icon>
-        </button> -->
-        <button class="action-button" mat-ripple [matMenuTriggerFor]="menu" [matMenuTriggerData]="{id: element?.accountId, status: element?.status}">
+        </button>
+        <button class="action-button" mat-ripple [matMenuTriggerFor]="menu" [matMenuTriggerData]="{id: element?.id, status: element?.status}">
           <mat-icon>more_vert</mat-icon>
         </button>
       </td>

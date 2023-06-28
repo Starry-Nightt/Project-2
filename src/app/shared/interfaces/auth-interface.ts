@@ -1,16 +1,16 @@
 import { GENDER, ROLE, STATUS } from '@constants/enum';
 
-export interface LoginDetail {
+export interface LoginPayload {
   email: string;
   password: string;
 }
 
-export interface RegisterDetail {
+export interface RegisterPayload {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
   gender: GENDER;
   role: ROLE;
-  birthday?: string;
+  birthday: string;
 }

@@ -1,6 +1,6 @@
 export const enum GENDER {
+  MALE = 1,
   FEMALE,
-  MALE,
 }
 
 export const enum STATUS {

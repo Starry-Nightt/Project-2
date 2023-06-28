@@ -1,74 +1,44 @@
 import { Injectable } from '@angular/core';
-import { UserRepository } from '@repositories/user-repository';
 import { StorageService } from '@services/storage.service';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Observable, catchError, of, switchMap, tap } from 'rxjs';
 import { ProfileService } from './profile.service';
 import { Router } from '@angular/router';
-import { LoginDetail, RegisterDetail } from '@interfaces/auth-interface';
-import { AccountRepository } from '../graphql/account.repository';
 import { ROLE } from '@constants/enum';
+import { UserRepository } from '@graphql/user.repository';
+import { LoginPayload, RegisterPayload } from '@interfaces/auth-interface';
+import { AuthRepository } from '@graphql/auth.repository';
+import { User } from '@models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   isLoggedIn = false;
-  accessToken: string;
+  token: string;
 
   constructor(
     private profile: ProfileService,
     private storage: StorageService,
-    private userRepository: UserRepository,
     private router: Router,
-    private accountRepository: AccountRepository
+    private authRepository: AuthRepository
   ) {}
 
-  login(detail: LoginDetail): Observable<any> {
-    return this.accountRepository.login(detail).pipe(
-      tap((res) => {
+  login(detail: LoginPayload) {
+    return this.authRepository.login(detail).pipe(
+      catchError(() => of()),
+      tap((res: any) => {
         this.setToken(res?.data?.login?.token);
+        const profile: User = res?.data?.login?.me;
         this.storage.set('email', JSON.stringify(detail.email));
         this.storage.set('password', JSON.stringify(detail.password));
-        const role = res?.data?.login?.account?.role;
-        const accountId = res?.data?.login?.account?.id;
-        if (role === ROLE.ADMIN)
-          this.profile.setProfile({
-            ...res?.data?.login?.admin,
-            role,
-            accountId,
-          });
-        else if (role === ROLE.STUDENT)
-          this.profile.setProfile({
-            ...res?.data?.login?.student,
-            role,
-            accountId,
-          });
-        else if (role === ROLE.TEACHER)
-          this.profile.setProfile({
-            ...res?.data?.login?.teacher,
-            role,
-            accountId,
-          });
+        this.profile.setProfile(profile);
         this.loggedIn();
       })
     );
   }
 
-  register(detail: RegisterDetail): Observable<any> {
-    return this.accountRepository.register(detail);
-  }
-
-  hello(): Observable<any> {
-    return this.accountRepository.hello();
-  }
-
-  verifyToken(): Observable<any> {
-    return this.userRepository.refreshToken().pipe(
-      tap((res) => {
-        this.setToken(res?.data);
-      }),
-      switchMap(() => this.userRepository.userInfo(this.accessToken))
-    );
+  register(detail: RegisterPayload) {
+    return this.authRepository.register(detail);
   }
 
   setToken(token: String): void {
@@ -83,14 +53,15 @@ export class AuthService {
 
   endSession() {
     this.isLoggedIn = false;
-    this.accessToken = '';
+    this.token = null;
     this.storage.remove('token');
+    this.storage.remove('email');
+    this.storage.remove('password');
     this.profile.setProfile(null);
     this.router.navigate(['/login']);
   }
 
   logout() {
-    // return this.userRepository.logout().pipe(tap(() => this.endSession()));
     this.endSession();
   }
 }

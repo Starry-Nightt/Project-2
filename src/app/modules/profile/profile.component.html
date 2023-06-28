@@ -1,0 +1,113 @@
+<form [formGroup]="form">
+  <div class="flex" *ngIf="me">
+    <div class="avatar">
+      <img
+        src="../../../assets/images/avatar-admin-default.jpg"
+        *ngIf="isAdmin"
+      />
+      <img
+        src="../../../assets/images/avatar-student-default.jpg"
+        *ngIf="isStudent"
+      />
+      <img
+        src="../../../assets/images/avatar-teacher-default.jpg"
+        *ngIf="isTeacher"
+      />
+    </div>
+    <ul class="info">
+      <div class="btn-group">
+        <button
+          mat-mini-fab
+          color="primary"
+          class="btn"
+          (click)="onEdit()"
+          *ngIf="!editMode"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-mini-fab
+          color="primary"
+          class="btn"
+          (click)="onSave()"
+          *ngIf="editMode"
+        >
+          <mat-icon>check</mat-icon>
+        </button>
+        <button
+          mat-mini-fab
+          color="primary"
+          class="btn"
+          (click)="onCancel()"
+          *ngIf="editMode"
+        >
+        <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <li class="row">
+        <h4>Họ và tên</h4>
+        <p *ngIf="!editMode">{{ fullName }}</p>
+        <div *ngIf="editMode">
+          <mat-form-field appearance="outline" class="mr-4">
+            <input matInput formControlName="lastName" placeholder="Họ" />
+            <mat-error>
+              <app-validation-error
+                [control]="form.controls.lastName"
+              ></app-validation-error>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="mr-4">
+            <input matInput formControlName="firstName" placeholder="Tên" />
+            <mat-error>
+              <app-validation-error
+                [control]="form.controls.firstName"
+              ></app-validation-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </li>
+      <li class="row">
+        <h4>Giới tính</h4>
+        <p *ngIf="!editMode">{{ genderName }}</p>
+        <div *ngIf="editMode">
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button
+              *ngFor="let item of genders"
+              [value]="item.value"
+              >{{ item?.viewValue }}</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+      </li>
+      <li class="row">
+        <h4>Ngày sinh</h4>
+        <p *ngIf="!editMode">{{ me.birthday }}</p>
+        <div *ngIf="editMode">
+          <mat-form-field appearance="outline">
+            <mat-label>Ngày sinh</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="birthday"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>
+              <app-validation-error
+                [control]="form.controls.birthday"
+              ></app-validation-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </li>
+      <li class="row">
+        <h4>Chức vụ</h4>
+        <p>{{ roleName }}</p>
+        <div *ngIf="editMode"></div>
+      </li>
+    </ul>
+  </div>
+</form>

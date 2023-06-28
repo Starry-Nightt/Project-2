@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@bases/base/base.component';
-import { AccountRepository } from '@graphql/account.repository';
 import { ComponentService } from '@services/component.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -14,16 +13,15 @@ export class DemoComponent extends BaseComponent implements OnInit {
   constructor(
     service: ComponentService,
     public profile: ProfileService,
-    private authService: AuthService,
-    private accountRepository: AccountRepository
+    private authService: AuthService // private accountRepository: AccountRepository
   ) {
     super(service);
   }
 
   ngOnInit() {}
 
-  getName() {
-    return this.profile.current?.fullName;
+  get fullName() {
+    return this.profile.current.lastName + ' ' + this.profile.current.firstName;
   }
 
   getRoleName() {
@@ -38,12 +36,12 @@ export class DemoComponent extends BaseComponent implements OnInit {
   }
 
   onVerify() {
-    this.authService.verifyToken();
+    // this.authService.verifyToken();
   }
 
   getUserList() {
-    this.accountRepository.getAllAccount().subscribe((res) => {
-      console.log(res);
-    });
+    // this.accountRepository.getAllAccount().subscribe((res) => {
+    //   console.log(res);
+    // });
   }
 }

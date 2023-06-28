@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormFragmentComponent } from '@bases/form-fragment/form-fragment.component';
 import { ComponentService } from '@services/component.service';
 import { GENDER, ROLE, STATUS } from '@constants/enum';
-import { RegisterDetail } from '@interfaces/auth-interface';
 import { MomentToString, StringToMoment } from '@utils/convert';
+import { RegisterPayload } from '@interfaces/auth-interface';
 
 @Component({
   selector: 'app-register-form',
@@ -12,7 +12,7 @@ import { MomentToString, StringToMoment } from '@utils/convert';
   styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent
-  extends FormFragmentComponent<RegisterDetail>
+  extends FormFragmentComponent<RegisterPayload>
   implements OnInit
 {
   genders = [
@@ -43,22 +43,21 @@ export class RegisterFormComponent
     firstName: ['', [Validators.required]],
     lastName: ['', [Validators.required]],
     gender: [null, [Validators.required]],
-    // status: [STATUS.INACTIVE, [Validators.required]],
-    // birthday: ['', [Validators.required]],
+    birthday: ['', [Validators.required]],
     role: [null, [Validators.required]],
   });
 
   firstForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
+    email: ['tien@gmail.com', [Validators.required, Validators.email]],
+    password: ['123', [Validators.required]],
     role: [null, [Validators.required]],
   });
 
   secondForm: FormGroup = this.fb.group({
-    firstName: ['', [Validators.required]],
-    lastName: ['', [Validators.required]],
+    firstName: ['dang', [Validators.required]],
+    lastName: ['tien', [Validators.required]],
     gender: [null, [Validators.required]],
-    // birthday: ['', [Validators.required]],
+    birthday: ['', [Validators.required]],
   });
 
   constructor(service: ComponentService, private fb: FormBuilder) {
@@ -67,7 +66,7 @@ export class RegisterFormComponent
 
   override onSubmit(): void {
     const formValue = { ...this.firstForm.value, ...this.secondForm.value };
-    // formValue.birthday = MomentToString(formValue.birthday);
+    formValue.birthday = MomentToString(formValue.birthday);
     this.form.patchValue(formValue);
     super.onSubmit();
   }

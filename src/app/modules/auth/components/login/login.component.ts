@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@bases/base/base.component';
-import { LoginDetail } from '@interfaces/auth-interface';
+import { LoginPayload } from '@interfaces/auth-interface';
 import { ComponentService } from '@services/component.service';
 import { StorageService } from '@services/storage.service';
-import { catchError, of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -29,15 +28,7 @@ export class LoginComponent extends BaseComponent {
     this.login(detail);
   }
 
-  login(detail: LoginDetail) {
+  login(detail: LoginPayload) {
     this.authService.login(detail).subscribe();
-  }
-
-  verify() {
-    if (!this.storage.get('refresh_token')) return;
-    this.authService.verifyToken().subscribe((res) => {
-      const { email, password } = res.data;
-      this.login({ email, password });
-    });
   }
 }
