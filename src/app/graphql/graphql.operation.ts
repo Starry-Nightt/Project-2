@@ -19,14 +19,7 @@ export const CREATE_USER = gql`
       gender: $gender
       birthday: $birthday
     ) {
-      id
-      firstName
-      lastName
-      role
-      email
-      password
-      gender
-      birthday
+      message
     }
   }
 `;
@@ -122,6 +115,14 @@ export const LOGIN = gql`
         gender
         birthday
       }
+    }
+  }
+`;
+
+export const CHANGE_PASSWORD = gql`
+  mutation ($currentPwd: String!, $newPwd: String!) {
+    changePassword(payload: { currentPwd: $currentPwd, newPwd: $newPwd }) {
+      message
     }
   }
 `;

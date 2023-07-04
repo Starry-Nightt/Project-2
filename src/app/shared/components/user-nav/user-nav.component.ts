@@ -48,4 +48,11 @@ export class UserNavComponent extends BaseComponent implements OnInit {
     const path = this.isAdmin ? '/manage/profile' : '/use/profile';
     this.redirect(path);
   }
+
+  onChangePassword() {
+    const path = this.isAdmin
+      ? '/manage/profile/change-password'
+      : '/use/profile/change-password';
+    this.redirect(path);
+  }
 }

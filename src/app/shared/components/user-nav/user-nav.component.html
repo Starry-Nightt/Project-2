@@ -14,8 +14,8 @@
     <mat-icon>person</mat-icon>
     <span>Thông tin tài khoản</span>
   </button>
-  <button mat-menu-item [disabled]="isAdmin">
-    <mat-icon> vpn_key</mat-icon>
+  <button mat-menu-item (click)="onChangePassword()">
+    <mat-icon > vpn_key</mat-icon>
     <span>Đổi mật khẩu</span>
   </button>
   <button mat-menu-item (click)="onLogout()">

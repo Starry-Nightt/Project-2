@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BaseComponent } from '@bases/base/base.component';
-import { ROLE, GENDER } from '@constants/enum';
+import { GENDER, ROLE } from '@constants/enum';
 import { UserRepository } from '@graphql/user.repository';
 import { User } from '@models/user.model';
 import { ComponentService } from '@services/component.service';
-import { MomentToString, StringToMoment } from '@utils/convert';
+import { StringToMoment, MomentToString } from '@utils/convert';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  selector: 'app-info',
+  templateUrl: './info.component.html',
+  styleUrls: ['./info.component.scss'],
 })
-export class ProfileComponent extends BaseComponent implements OnInit {
+export class InfoComponent extends BaseComponent implements OnInit {
   me: User = null;
   form = this.fb.group({
     firstName: [''],

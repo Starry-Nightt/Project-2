@@ -14,3 +14,8 @@ export interface RegisterPayload {
   role: ROLE;
   birthday: string;
 }
+
+export interface ChangePasswordPayload {
+  currentPwd: string;
+  newPwd: string;
+}
